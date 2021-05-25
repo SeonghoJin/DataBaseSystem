@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%-include('head')%>
+</head>
+
+<body>
+    <%-include('nav')%>
+        <div class="mb-3">
+            <form action="/login" method="POST" name="login_form" onsubmit="return validateForm()">
+                <label for="name_input" class="form-label">이름</label>
+                <input type="text" name="name" required class="form-control" id="name_input" placeholder="홍길동">
+                <button type="submit" id="login_button" class="btn btn-primary">확인</button>
+            </form>
+        </div>
+</body>
+
+</html>
