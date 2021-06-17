@@ -67,11 +67,9 @@ var hotel = /** @class */ (function () {
                             return [2 /*return*/];
                         }
                         home = home[0];
-                        console.log(home);
                         return [4 /*yield*/, this.roomRepository.findRoomByHomeIndex(home.homeIndex)];
                     case 3:
                         rooms = (_a.sent());
-                        console.log(rooms);
                         res.render('hotel', {
                             user: req.session.user,
                             rooms: rooms

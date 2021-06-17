@@ -29,9 +29,7 @@ export default class hotel {
                 return;
             }
             home = home[0];
-            console.log(home);
             const rooms: Room[] = (await this.roomRepository.findRoomByHomeIndex(home.homeIndex));
-            console.log(rooms);
             res.render('hotel', {
                 user: req.session.user,
                 rooms: rooms

@@ -1,4 +1,4 @@
-{"hid":1,"rid":11,"description":"1번째의 1번째","price":45000,"isReservation":"false","_id":"7zNUsVviRQWCCgl123"}
+{"hid":1,"rid":11,"description":"1번째의 1번째","price":45000,"isReservation":true,"_id":"7zNUsVviRQWCCgl123"}
 {"hid":4,"rid":4,"description":"4번째의 4번째","price":45000,"isReservation":"false","_id":"7zNUsVviRQWCCglz"}
 {"id":"진","password":"진","_id":"9g2Zn9qFK3GWgCen"}
 {"homeIndex":3,"description":"매우 좋습니당","roomCount":1,"title":"세번째 집","_id":"JRLpH8fXQ2AgQObI"}
@@ -17,4 +17,3 @@
 {"hid":1,"rid":12,"description":"1번째의 2번째","price":35000,"isReservation":true,"_id":"zUlGO73bdMOXlojLa"}
 {"hid":3,"rid":13,"description":"3번째의 1번째","price":35000,"isReservation":true,"_id":"zUlGO73bdMOXlojLab"}
 {"hid":2,"rid":132,"description":"2번째의 1번째","price":35000,"isReservation":true,"_id":"zUlGO73bdMOXlojLaba"}
-{"hid":1,"rid":11,"description":"1번째의 1번째","price":45000,"isReservation":true,"_id":"7zNUsVviRQWCCgl123"}
