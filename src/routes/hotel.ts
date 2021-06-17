@@ -22,13 +22,16 @@ export default class hotel {
         app.use('/hotel', this.router);
 
         this.router.get('/:id', async (req, res) => {
+            await this.roomRepository.getAllData()
             let home: Home[] | Home = (await this.homeRepository.findHomeByIndex(Number(req.params.id)))
             if (home.length === 0) {
                 res.redirect('/');
                 return;
             }
             home = home[0];
+            console.log(home);
             const rooms: Room[] = (await this.roomRepository.findRoomByHomeIndex(home.homeIndex));
+            console.log(rooms);
             res.render('hotel', {
                 user: req.session.user,
                 rooms: rooms

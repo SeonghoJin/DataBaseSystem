@@ -56,17 +56,22 @@ var hotel = /** @class */ (function () {
             var home, rooms;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.homeRepository.findHomeByIndex(Number(req.params.id))];
+                    case 0: return [4 /*yield*/, this.roomRepository.getAllData()];
                     case 1:
+                        _a.sent();
+                        return [4 /*yield*/, this.homeRepository.findHomeByIndex(Number(req.params.id))];
+                    case 2:
                         home = (_a.sent());
                         if (home.length === 0) {
                             res.redirect('/');
                             return [2 /*return*/];
                         }
                         home = home[0];
+                        console.log(home);
                         return [4 /*yield*/, this.roomRepository.findRoomByHomeIndex(home.homeIndex)];
-                    case 2:
+                    case 3:
                         rooms = (_a.sent());
+                        console.log(rooms);
                         res.render('hotel', {
                             user: req.session.user,
                             rooms: rooms

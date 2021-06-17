@@ -63,8 +63,6 @@ var ConcreteUserRepository = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.database.find({ id: id, password: password })];
                     case 1:
                         user = _a.sent();
-                        console.log(id, password);
-                        console.log(user);
                         return [2 /*return*/, user.length !== 0];
                 }
             });

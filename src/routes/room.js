@@ -1,3 +1,14 @@
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -71,13 +82,22 @@ var room = /** @class */ (function () {
                             return [2 /*return*/];
                         }
                         room = room[0];
+                        if (room.isReservation === true) {
+                            res.redirect('/');
+                            return [2 /*return*/];
+                        }
+                        return [4 /*yield*/, this.roomRepository.update({
+                                rid: room.rid
+                            }, __assign(__assign({}, room), { isReservation: true }))];
+                    case 2:
+                        _f.sent();
                         _b = (_a = res).render;
                         _c = ['index'];
                         _d = {
                             user: req.session.user
                         };
                         return [4 /*yield*/, this.homeRepository.getAllData()];
-                    case 2:
+                    case 3:
                         _b.apply(_a, _c.concat([(_d.hotels = (_f.sent()),
                                 _d.successReservation = true,
                                 _d)]));

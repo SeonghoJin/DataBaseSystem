@@ -7,11 +7,17 @@ export interface RoomRepository extends Repository<Room> {
     findRoomByIndex(RoomIndex: number): Promise<Room[]>
     insert(item: Room): Promise<void>
     getAllData(): Promise<any[]>
+    update(query: any, updateQuery: any): Promise<void>
 }
 
 export class ConcreteRoomRepository implements RoomRepository {
 
+    async update(query: string, updateQuery: string): Promise<void> {
+        await this.database.update(query, updateQuery)
+    }
+
     findRoomByHomeIndex(HomeIndex: number): Promise<Room[]> {
+        console.log(HomeIndex);
         return this.database.find({
             hid: HomeIndex
         });

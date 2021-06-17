@@ -25,8 +25,6 @@ export class ConcreteUserRepository implements UserRepository {
 
     async exist(id: string, password: string): Promise<boolean> {
         const user: User[] = await this.database.find({ id: id, password: password });
-        console.log(id, password);
-        console.log(user);
         return user.length !== 0;
     }
 

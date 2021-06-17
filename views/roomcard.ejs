@@ -10,8 +10,19 @@
                     <p class="card-text"><%=room.description%></p>
                     <p class="card-text small">가격<%=room.price%></p>
                 </div>
-                <a href="/room/<%=room.rid%>" class="btn btn-primary card-btn">예약</a>
+                    <% if(room.isReservation === "false"){ %>
+                        <a href="/room/<%=room.rid%>" 
+                            class="btn btn-primary card-btn" >예약
+                        </a>
+                    <% }else{ %>
+                        <a href="/room/<%=room.rid%>" 
+                            class="btn btn-primary card-btn disabled" >예약불가
+                        </a>
+                    <% } %>
             </div>
         </div>
     </div>
 </li>
+<script>
+    console.log("<%=room.isReservation%>");
+</script>

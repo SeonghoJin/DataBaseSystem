@@ -48,7 +48,20 @@ import { DBconfig } from "../config/index.js";
 var ConcreteRoomRepository = /** @class */ (function () {
     function ConcreteRoomRepository() {
     }
+    ConcreteRoomRepository.prototype.update = function (query, updateQuery) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.database.update(query, updateQuery)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     ConcreteRoomRepository.prototype.findRoomByHomeIndex = function (HomeIndex) {
+        console.log(HomeIndex);
         return this.database.find({
             hid: HomeIndex
         });

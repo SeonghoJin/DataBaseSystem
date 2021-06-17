@@ -32,6 +32,19 @@ export default class room {
                 return;
             }
             room = room[0];
+
+            if (room.isReservation === true) {
+                res.redirect('/');
+                return;
+            }
+
+            await this.roomRepository.update({
+                rid: room.rid
+            }, {
+                ...room,
+                isReservation: true
+            });
+
             res.render('index', {
                 user: req.session.user,
                 hotels: (await this.homeRepository.getAllData()),
