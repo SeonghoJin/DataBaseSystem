@@ -2,30 +2,39 @@
     <div class="container-fluid">
         <%if(user.isAuthenticated){%>
             <a class="navbar-brand" href="/">
-                반갑습니다. <%= user.name %>님!
+                반갑습니다. <%=user.name%>님!
             </a>
-            <%}else {%>
-                <a class="navbar-brand" href="/">안녕하세요!</a>
-                <% } %>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNav" aria-controls="123" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-            </button>
-                    <%if(user.isAuthenticated){%>
-                        <div class="collapse navbar-collapse" id="myNav">
-                            <div class="navbar-nav">
-                                <a class="nav-link active" href="/info" aria-current="page">내 정보</a>
-                                <a class="nav-link active" href="/logout" aria-current="page">로그아웃</a>
-                            </div>
-                        </div>
-                        <%}else {%>
-                            <div class="collapse navbar-collapse" id="myNav">
-                                <div class="navbar-nav">
-                                    <a class="nav-link active" aria-current="page" href="/sign-up">회원가입</a>
-                                    <a class="nav-link active" aria-current="page" href="/login">로그인</a>
-                                </div>
-                            </div>
-                            <%}%>
+        <%}else {%>
+            <a class="navbar-brand" href="/">안전한 집을 찾아보세요!</a>
+        <% } %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNav" aria-controls="123" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="myNav">  
+            <div class="navbar-nav">
+                <%if(user.isAuthenticated){%>
+                <a class="nav-link active" href="/info" aria-current="page">내 정보</a>
+                <a class="nav-link active" href="/logout" aria-current="page">로그아웃</a>
+                <%}else{ %>
+                    <a class="nav-link active" aria-current="page" href="/sign-up">회원가입</a>
+                    <a class="nav-link active" aria-current="page" href="/login">로그인</a>
+                <%}%>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="true">
+                        지역 선택
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="/">서울특별시</a></li>
+                        <li><a class="dropdown-item" href="/">부산광역시</a></li>
+                        <li><a class="dropdown-item" href="/">대구광역시</a></li>
+                        <li><a class="dropdown-item" href="/">인천광역시</a></li>
+                        <li><a class="dropdown-item" href="/">광주광역시</a></li>
+                        <li><a class="dropdown-item" href="/">대전광역시</a></li>
+                        <li><a class="dropdown-item" href="/">울산광역시</a></li>
+                        <li><a class="dropdown-item" href="/">세종특별자치시</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>
-<script>
-</script>

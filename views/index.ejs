@@ -4,23 +4,8 @@
 <head>
     <%-include('head')%>
 </head>
-
+<body>
     <%-include('nav')%>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="true">
-                Dropdown button
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="/">서울특별시</a></li>
-                <li><a class="dropdown-item" href="/">부산광역시</a></li>
-                <li><a class="dropdown-item" href="/">대구광역시</a></li>
-                <li><a class="dropdown-item" href="/">인천광역시</a></li>
-                <li><a class="dropdown-item" href="/">광주광역시</a></li>
-                <li><a class="dropdown-item" href="/">대전광역시</a></li>
-                <li><a class="dropdown-item" href="/">울산광역시</a></li>
-                <li><a class="dropdown-item" href="/">세종특별자치시</a></li>
-            </ul>
-        </div>
         <ul>
             <% for(var i = 0; i < hotels.length; i++){%>
                 <%-include('hotelcard', {
