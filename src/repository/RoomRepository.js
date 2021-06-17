@@ -43,48 +43,60 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { AutoWired } from '../core/Ioc/decorator/Autowired.js';
-import { User } from '../domain/User.js';
-import { ConcreteUserRepository } from '../repository/UserRepository.js';
-var AuthService = /** @class */ (function () {
-    function AuthService() {
+import { DBconfig } from "../config/index.js";
+import { Connect } from "../core/database/decorator/Connect.js";
+var ConcreteRoomRepository = /** @class */ (function () {
+    function ConcreteRoomRepository() {
     }
-    AuthService.prototype.Login = function (name) {
+    ConcreteRoomRepository.prototype.findRoomByHomeIndex = function (HomeIndex) {
+        return this.database.find({
+            hid: HomeIndex
+        });
+    };
+    ConcreteRoomRepository.prototype.findRoomByIndex = function (RoomIndex) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                if (Array.isArray(name)) {
-                    name = name.join('');
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.database.find({
+                            rid: RoomIndex
+                        })];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
-                return [2 /*return*/, this.userRepository.exist(name)];
             });
         });
     };
-    AuthService.prototype.SignUp = function (name) {
+    ConcreteRoomRepository.prototype.insert = function (item) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                if (Array.isArray(name)) {
-                    name = name.join('');
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.database.insert(item)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
                 }
-                this.userRepository.insert(new User(name, name));
-                return [2 /*return*/, true];
             });
         });
     };
-    AuthService.prototype.isUser = function (id) {
+    ConcreteRoomRepository.prototype.getAllData = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var allData;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.database.getAllData()];
+                    case 1:
+                        allData = _a.sent();
+                        allData = allData.filter(function (data) {
+                            return data.rid !== undefined;
+                        });
+                        return [2 /*return*/, allData];
+                }
             });
         });
-    };
-    AuthService.prototype.vaildEmail = function (email) {
-        var spEmail = email.split('@');
-        return spEmail.length == 2 && spEmail[1] != '';
     };
     __decorate([
-        AutoWired(ConcreteUserRepository),
+        Connect(DBconfig),
         __metadata("design:type", Object)
-    ], AuthService.prototype, "userRepository", void 0);
-    return AuthService;
+    ], ConcreteRoomRepository.prototype, "database", void 0);
+    return ConcreteRoomRepository;
 }());
-export { AuthService };
+export { ConcreteRoomRepository };

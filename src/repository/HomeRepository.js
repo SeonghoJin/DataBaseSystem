@@ -43,17 +43,35 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { DBconfig } from "../config";
-import { Connect } from "../core/database/decorator/Connect";
+import { DBconfig } from "../config/index.js";
+import { Connect } from "../core/database/decorator/Connect.js";
 var ConcreteHomeRepository = /** @class */ (function () {
     function ConcreteHomeRepository() {
     }
-    ConcreteHomeRepository.prototype.insertHome = function (item) {
+    ConcreteHomeRepository.prototype.getAllData = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var allData;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.database.getAllData()];
+                    case 1:
+                        allData = _a.sent();
+                        allData = allData.filter(function (data) {
+                            return (data.homeIndex !== undefined);
+                        });
+                        return [2 /*return*/, allData];
+                }
+            });
+        });
+    };
+    ConcreteHomeRepository.prototype.insert = function (item) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.database.insert({
-                            homeIndex: item.homeIndex
+                            homeIndex: item.homeIndex,
+                            description: item.description,
+                            title: item.title
                         })];
                     case 1:
                         _a.sent();

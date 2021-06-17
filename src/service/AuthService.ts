@@ -4,7 +4,6 @@ import { Bean } from '../core/Ioc/decorator/Bean.js';
 import { User } from '../domain/User.js';
 import { ConcreteUserRepository, UserRepository } from '../repository/UserRepository.js';
 
-@Bean()
 export class AuthService {
 
     @AutoWired(ConcreteUserRepository)

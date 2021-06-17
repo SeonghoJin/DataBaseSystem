@@ -8,6 +8,12 @@ var MySQL = /** @class */ (function () {
             database: config.DB_NAME
         });
     }
+    MySQL.prototype.getAllData = function () {
+        throw new Error("Method not implemented.");
+    };
+    MySQL.prototype.count = function () {
+        throw new Error("Method not implemented.");
+    };
     MySQL.prototype.find = function (query) {
         this.connection.query("desc table");
         throw new Error("Method not implemented.");

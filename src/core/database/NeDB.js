@@ -6,6 +6,12 @@ var NeDB = /** @class */ (function () {
             autoload: true
         });
     }
+    NeDB.prototype.getAllData = function () {
+        var _this = this;
+        return new Promise(function (res, rej) {
+            res(_this.db.getAllData());
+        });
+    };
     NeDB.prototype.insert = function (data) {
         var _this = this;
         return new Promise(function (res, rej) {

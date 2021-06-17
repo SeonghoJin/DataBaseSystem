@@ -5,9 +5,7 @@
     <%-include('head')%>
 </head>
 
-<body>
     <%-include('nav')%>
-
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="true">
                 Dropdown button
@@ -24,12 +22,19 @@
             </ul>
         </div>
         <ul>
-            <% for(var i = 0; i < hotelCount; i++){%>
+            <% for(var i = 0; i < hotels.length; i++){%>
                 <%-include('hotelcard', {
-                    index : i
+                    hotel : hotels[i]
                 });%>
             <%}%>
         </ul>
 </body>
 
+<script type="text/javascript">
+    const successReservation = "<%=successReservation%>"
+    console.log(successReservation);
+    if(successReservation){
+        alert("예약 성공하셨습니다!");
+    }
+</script>
 </html>

@@ -35,24 +35,101 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { Router } from 'express';
+import { ConcreteHomeRepository } from '../repository/HomeRepository.js';
+import { ConcreteRoomRepository } from '../repository/RoomRepository.js';
 import { AuthService } from '../service/AuthService.js';
 import auth from './auth.js';
 import { SessionUser } from './SessionUser.js';
 var router = Router();
 new auth(router);
 var authService = new AuthService();
-router.get('/', function (req, res) {
-    req.session.user = req.session.user ? req.session.user : new SessionUser({
-        name: null,
-        id: req.sessionID,
-        isAuthenticated: false
+var homeRepository = new ConcreteHomeRepository();
+var roomRepository = new ConcreteRoomRepository();
+// {"homeIndex":3,"description":"매우 좋습니당","roomCount":1,"title":"첫번째 집","_id":"JRLpH8fXQ2AgQObI"}
+// {"homeIndex":2,"description":"매우 좋습니당","roomCount":2,"title":"두번째 집","_id":"bzRBa1KHX9Rudl6h"}
+// {"homeIndex":1,"description":"매우 좋습니당","roomCount":1,"title":"첫번째 집","_id":"cM9DMYwKx4nEo5uP"}
+// {"homeIndex":5,"description":"좋습니당","roomCount":3,"title":"다섯번째 집","_id":"oUuPFVYcxZRoz13K"}
+// {"homeIndex":4,"description":"매우 좋습니당","roomCount":2,"title":"네번째 집","_id":"q82HonEdQI6Eqd8Z"}
+router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, _b, _c;
+    var _d;
+    return __generator(this, function (_e) {
+        switch (_e.label) {
+            case 0:
+                // roomRepository.insert(new Room({
+                //     hid: 3,
+                //     rid: 1,
+                //     description: "3번째의 1번째",
+                //     price: 85000
+                // }));
+                // roomRepository.insert(new Room({
+                //     hid: 2,
+                //     rid: 2,
+                //     description: "2번째의 2번째",
+                //     price: 65000
+                // }));
+                // roomRepository.insert(new Room({
+                //     hid: 2,
+                //     rid: 3,
+                //     description: "2번째의 3번째",
+                //     price: 55000
+                // }));
+                // roomRepository.insert(new Room({
+                //     hid: 4,
+                //     rid: 4,
+                //     description: "4번째의 4번째",
+                //     price: 45000
+                // }));
+                // roomRepository.insert(new Room({
+                //     hid: 4,
+                //     rid: 5,
+                //     description: "4번째의 5번째",
+                //     price: 35000
+                // }));
+                // roomRepository.insert(new Room({
+                //     hid: 5,
+                //     rid: 6,
+                //     description: "5번째의 6번째",
+                //     price: 1200
+                // }));
+                // roomRepository.insert(new Room({
+                //     hid: 5,
+                //     rid: 7,
+                //     description: "5번째의 7번째",
+                //     price: 500123
+                // }));
+                // roomRepository.insert(new Room({
+                //     hid: 1,
+                //     rid: 8,
+                //     description: "1번째의 8번째",
+                //     price: 50032
+                // }));
+                // roomRepository.insert(new Room({
+                //     hid: 1,
+                //     rid: 9,
+                //     description: "1번째의 9번째",
+                //     price: 2333
+                // }));
+                req.session.user = req.session.user ? req.session.user : new SessionUser({
+                    name: null,
+                    id: req.sessionID,
+                    isAuthenticated: false
+                });
+                req.session.save();
+                _b = (_a = res).render;
+                _c = ['index'];
+                _d = {
+                    user: req.session.user
+                };
+                return [4 /*yield*/, homeRepository.getAllData()];
+            case 1:
+                _b.apply(_a, _c.concat([(_d.hotels = _e.sent(),
+                        _d.successReservation = false,
+                        _d)]));
+                return [2 /*return*/];
+        }
     });
-    req.session.save();
-    res.render('index', {
-        user: req.session.user,
-        hotelCount: 5
-    });
-});
+}); });
 router.get('/login', function (req, res) {
     res.render('login', {
         user: req.session.user
@@ -121,10 +198,61 @@ router.get('/info', function (req, res) {
         user: req.session.user
     });
 });
-router.get('/hotel/:id', function (req, res) {
-    res.render('hotel', {
-        user: req.session.user,
-        hotelIndex: 1
+router.get('/hotel/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var home, rooms;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, homeRepository.findHomeByIndex(Number(req.params.id))];
+            case 1:
+                home = (_a.sent());
+                if (home.length === 0) {
+                    res.redirect('/');
+                    return [2 /*return*/];
+                }
+                home = home[0];
+                return [4 /*yield*/, roomRepository.findRoomByHomeIndex(home.homeIndex)];
+            case 2:
+                rooms = (_a.sent());
+                res.render('hotel', {
+                    user: req.session.user,
+                    rooms: rooms
+                });
+                return [2 /*return*/];
+        }
     });
-});
+}); });
+router.get('/room/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var room, _a, _b, _c;
+    var _d;
+    var _e;
+    return __generator(this, function (_f) {
+        switch (_f.label) {
+            case 0:
+                if (req.session.user === undefined || ((_e = req.session.user) === null || _e === void 0 ? void 0 : _e.isAuthenticated) === false) {
+                    res.redirect('/');
+                    return [2 /*return*/];
+                }
+                return [4 /*yield*/, roomRepository.findRoomByIndex(Number(req.params.id))];
+            case 1:
+                room = (_f.sent());
+                if (room.length === 0) {
+                    res.redirect('/');
+                    return [2 /*return*/];
+                }
+                room = room[0];
+                _b = (_a = res).render;
+                _c = ['index'];
+                _d = {
+                    user: req.session.user
+                };
+                return [4 /*yield*/, homeRepository.getAllData()];
+            case 2:
+                _b.apply(_a, _c.concat([(_d.hotels = (_f.sent()),
+                        _d.successReservation = true,
+                        _d)]));
+                res.status(200).send();
+                return [2 /*return*/];
+        }
+    });
+}); });
 export default router;

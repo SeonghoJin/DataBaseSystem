@@ -1,19 +1,16 @@
 export class Home {
     title: string | null | undefined;
     description: string | null | undefined;
-    roomCount: number | null | undefined;
-    homeIndex: number | null | undefined;
+    homeIndex: number;
 
-    constructor({ title, description, roomCount, homeIndex }:
+    constructor({ title, description, homeIndex }:
         {
-            title: string | null | undefined,
-            description: string | null | undefined,
-            roomCount: number | null | undefined,
-            homeIndex: number | null | undefined
+            title?: string | null | undefined,
+            description?: string | null | undefined,
+            homeIndex: number
         }) {
         this.title = title;
         this.description = description;
-        this.roomCount = roomCount;
         this.homeIndex = homeIndex;
     }
 }
