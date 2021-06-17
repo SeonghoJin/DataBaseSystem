@@ -7,13 +7,17 @@
 
 <body>
     <%-include('nav')%>
+    <div class="auth-form-container">
         <div class="mb-3">
             <form action="/sign-up" method="POST" name="login_form" onsubmit="return validateForm()">
                 <label for="name_input" class="form-label">이름</label>
                 <input type="text" name="name" required class="form-control" id="name_input" placeholder="홍길동">
+                <label for="password_input" class="form-label">비밀번호</label>
+                <input type="text" name="password" required class="form-control" id="password_input" placeholder="password">
                 <button type="submit" id="login_button" class="btn btn-primary">확인</button>
             </form>
         </div>
+    </div>
 </body>
 
 </html>

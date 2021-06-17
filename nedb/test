@@ -1,17 +1,18 @@
 {"hid":1,"rid":9,"description":"1번째의 9번째","price":2333,"_id":"5UWEufT5TukeqxbC"}
 {"hid":4,"rid":4,"description":"4번째의 4번째","price":45000,"_id":"7zNUsVviRQWCCglz"}
-{"id":"진성호","password":"진성호","_id":"9jc436nbL3eFP8uJ"}
+{"id":"진","password":"진","_id":"9g2Zn9qFK3GWgCen"}
 {"homeIndex":3,"description":"매우 좋습니당","roomCount":1,"title":"첫번째 집","_id":"JRLpH8fXQ2AgQObI"}
 {"hid":5,"rid":6,"description":"5번째의 6번째","price":1200,"_id":"THDVBzh6Q4YBa7hQ"}
-{"id":"123","password":"123","_id":"WiIoBffpSgkVaErS"}
+{"id":"a","password":"a","_id":"UVX3udUGCujmbOv3"}
+{"id":"진성호 ","password":"213","_id":"YymmB23vJhDlooYE"}
 {"homeIndex":2,"description":"매우 좋습니당","roomCount":2,"title":"두번째 집","_id":"bzRBa1KHX9Rudl6h"}
 {"homeIndex":1,"description":"매우 좋습니당","roomCount":1,"title":"첫번째 집","_id":"cM9DMYwKx4nEo5uP"}
 {"hid":3,"rid":1,"description":"3번째의 1번째","price":85000,"_id":"g8vpmXODLYeAxx01"}
 {"hid":2,"rid":2,"description":"2번째의 2번째","price":65000,"_id":"hBkqerdBLh4TzQRA"}
 {"hid":2,"rid":3,"description":"2번째의 3번째","price":55000,"_id":"ihfSnA41ZKyAFlEa"}
-{"id":"123","password":"123","_id":"jEHZAxK5uCXGnKmI"}
 {"homeIndex":5,"description":"좋습니당","roomCount":3,"title":"다섯번째 집","_id":"oUuPFVYcxZRoz13K"}
 {"homeIndex":4,"description":"매우 좋습니당","roomCount":2,"title":"네번째 집","_id":"q82HonEdQI6Eqd8Z"}
 {"hid":1,"rid":8,"description":"1번째의 8번째","price":50032,"_id":"uYDEFG0XyAHcmoaH"}
 {"hid":5,"rid":7,"description":"5번째의 7번째","price":500123,"_id":"yR3KjmxinXMi2G4i"}
 {"hid":4,"rid":5,"description":"4번째의 5번째","price":35000,"_id":"zUlGO73bdMOXlojL"}
+{"id":"이성호","password":"123","_id":"TxsE2VVpm2cufn2T"}

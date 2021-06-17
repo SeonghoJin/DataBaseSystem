@@ -55,14 +55,16 @@ var ConcreteUserRepository = /** @class */ (function () {
             });
         });
     };
-    ConcreteUserRepository.prototype.exist = function (id) {
+    ConcreteUserRepository.prototype.exist = function (id, password) {
         return __awaiter(this, void 0, void 0, function () {
             var user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.database.find({ id: id })];
+                    case 0: return [4 /*yield*/, this.database.find({ id: id, password: password })];
                     case 1:
                         user = _a.sent();
+                        console.log(id, password);
+                        console.log(user);
                         return [2 /*return*/, user.length !== 0];
                 }
             });

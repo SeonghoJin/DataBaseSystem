@@ -7,24 +7,30 @@ export class AuthService {
     @AutoWired({ class: ConcreteUserRepository })
     userRepository: UserRepository;
 
-    public async login(name: string | string[]) {
+    public async login(name: string | string[], password: string | string[]) {
         if (Array.isArray(name)) {
             name = name.join('');
         }
-        return this.userRepository.exist(name);
+        if (Array.isArray(password)) {
+            password = password.join('');
+        }
+        return await this.userRepository.exist(name, password);
     }
 
-    public async singUp(name: string | string[]) {
+    public async singUp(name: string | string[], password: string | string[]) {
         if (Array.isArray(name)) {
             name = name.join('');
         }
-        this.userRepository.insert(new User(name, name));
+        if (Array.isArray(password)) {
+            password = password.join('');
+        }
+
+        const id = await this.userRepository.getUserById(name);
+        if (id.length !== 0) return false;
+
+        this.userRepository.insert(new User(name, password));
         return true;
     }
-
-    public async isUser(id: string) {
-    }
-
 
     public vaildEmail(email: String): boolean {
         const spEmail: string[] = email.split('@');

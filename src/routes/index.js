@@ -37,79 +37,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import { Router } from 'express';
 import { ConcreteHomeRepository } from '../repository/HomeRepository.js';
 import { ConcreteRoomRepository } from '../repository/RoomRepository.js';
-import { AuthService } from '../service/AuthService.js';
-import auth from './auth.js';
+import Auth from './auth.js';
 import { SessionUser } from './SessionUser.js';
 var router = Router();
-new auth(router);
-var authService = new AuthService();
+new Auth(router);
 var homeRepository = new ConcreteHomeRepository();
 var roomRepository = new ConcreteRoomRepository();
-// {"homeIndex":3,"description":"매우 좋습니당","roomCount":1,"title":"첫번째 집","_id":"JRLpH8fXQ2AgQObI"}
-// {"homeIndex":2,"description":"매우 좋습니당","roomCount":2,"title":"두번째 집","_id":"bzRBa1KHX9Rudl6h"}
-// {"homeIndex":1,"description":"매우 좋습니당","roomCount":1,"title":"첫번째 집","_id":"cM9DMYwKx4nEo5uP"}
-// {"homeIndex":5,"description":"좋습니당","roomCount":3,"title":"다섯번째 집","_id":"oUuPFVYcxZRoz13K"}
-// {"homeIndex":4,"description":"매우 좋습니당","roomCount":2,"title":"네번째 집","_id":"q82HonEdQI6Eqd8Z"}
 router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, _b, _c;
     var _d;
     return __generator(this, function (_e) {
         switch (_e.label) {
             case 0:
-                // roomRepository.insert(new Room({
-                //     hid: 3,
-                //     rid: 1,
-                //     description: "3번째의 1번째",
-                //     price: 85000
-                // }));
-                // roomRepository.insert(new Room({
-                //     hid: 2,
-                //     rid: 2,
-                //     description: "2번째의 2번째",
-                //     price: 65000
-                // }));
-                // roomRepository.insert(new Room({
-                //     hid: 2,
-                //     rid: 3,
-                //     description: "2번째의 3번째",
-                //     price: 55000
-                // }));
-                // roomRepository.insert(new Room({
-                //     hid: 4,
-                //     rid: 4,
-                //     description: "4번째의 4번째",
-                //     price: 45000
-                // }));
-                // roomRepository.insert(new Room({
-                //     hid: 4,
-                //     rid: 5,
-                //     description: "4번째의 5번째",
-                //     price: 35000
-                // }));
-                // roomRepository.insert(new Room({
-                //     hid: 5,
-                //     rid: 6,
-                //     description: "5번째의 6번째",
-                //     price: 1200
-                // }));
-                // roomRepository.insert(new Room({
-                //     hid: 5,
-                //     rid: 7,
-                //     description: "5번째의 7번째",
-                //     price: 500123
-                // }));
-                // roomRepository.insert(new Room({
-                //     hid: 1,
-                //     rid: 8,
-                //     description: "1번째의 8번째",
-                //     price: 50032
-                // }));
-                // roomRepository.insert(new Room({
-                //     hid: 1,
-                //     rid: 9,
-                //     description: "1번째의 9번째",
-                //     price: 2333
-                // }));
                 req.session.user = req.session.user ? req.session.user : new SessionUser({
                     name: null,
                     id: req.sessionID,
@@ -130,65 +69,6 @@ router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, f
         }
     });
 }); });
-router.get('/login', function (req, res) {
-    res.render('login', {
-        user: req.session.user
-    });
-});
-router.post('/login', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, _b;
-    return __generator(this, function (_c) {
-        switch (_c.label) {
-            case 0:
-                if (!(req.fields === undefined)) return [3 /*break*/, 1];
-                res.redirect('/');
-                return [3 /*break*/, 3];
-            case 1: return [4 /*yield*/, authService.login((_a = req.fields) === null || _a === void 0 ? void 0 : _a.name)];
-            case 2:
-                if (_c.sent()) {
-                    req.session.user = new SessionUser({
-                        name: (_b = req.fields) === null || _b === void 0 ? void 0 : _b.name,
-                        isAuthenticated: true,
-                        id: req.sessionID
-                    });
-                }
-                _c.label = 3;
-            case 3:
-                req.session.save(function () {
-                    res.redirect('/');
-                });
-                return [2 /*return*/];
-        }
-    });
-}); });
-router.post('/sign-up', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                if (!(req.fields === undefined)) return [3 /*break*/, 1];
-                res.redirect('/');
-                return [3 /*break*/, 3];
-            case 1: return [4 /*yield*/, authService.singUp((_a = req.fields) === null || _a === void 0 ? void 0 : _a.name)];
-            case 2:
-                _b.sent();
-                _b.label = 3;
-            case 3:
-                res.redirect('/');
-                return [2 /*return*/];
-        }
-    });
-}); });
-router.get('/sign-up', function (req, res) {
-    res.render('signup', {
-        user: req.session.user,
-    });
-});
-router.get('/logout', function (req, res) {
-    req.session.destroy(function (err) {
-    });
-    res.redirect('/');
-});
 router.get('/info', function (req, res) {
     if (req.session.user === undefined) {
         res.redirect('/');

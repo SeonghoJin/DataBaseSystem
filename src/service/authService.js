@@ -49,31 +49,43 @@ import { ConcreteUserRepository } from '../repository/UserRepository.js';
 var AuthService = /** @class */ (function () {
     function AuthService() {
     }
-    AuthService.prototype.login = function (name) {
+    AuthService.prototype.login = function (name, password) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                if (Array.isArray(name)) {
-                    name = name.join('');
+                switch (_a.label) {
+                    case 0:
+                        if (Array.isArray(name)) {
+                            name = name.join('');
+                        }
+                        if (Array.isArray(password)) {
+                            password = password.join('');
+                        }
+                        return [4 /*yield*/, this.userRepository.exist(name, password)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
-                return [2 /*return*/, this.userRepository.exist(name)];
             });
         });
     };
-    AuthService.prototype.singUp = function (name) {
+    AuthService.prototype.singUp = function (name, password) {
         return __awaiter(this, void 0, void 0, function () {
+            var id;
             return __generator(this, function (_a) {
-                if (Array.isArray(name)) {
-                    name = name.join('');
+                switch (_a.label) {
+                    case 0:
+                        if (Array.isArray(name)) {
+                            name = name.join('');
+                        }
+                        if (Array.isArray(password)) {
+                            password = password.join('');
+                        }
+                        return [4 /*yield*/, this.userRepository.getUserById(name)];
+                    case 1:
+                        id = _a.sent();
+                        if (id.length !== 0)
+                            return [2 /*return*/, false];
+                        this.userRepository.insert(new User(name, password));
+                        return [2 /*return*/, true];
                 }
-                this.userRepository.insert(new User(name, name));
-                return [2 /*return*/, true];
-            });
-        });
-    };
-    AuthService.prototype.isUser = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/];
             });
         });
     };

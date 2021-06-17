@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { AuthService } from '../service/AuthService.js';
-import { v4 } from 'uuid'
 import { AutoWired } from 'jypescript';
+import { SessionUser } from './SessionUser.js';
 
 declare module 'express-session' {
     interface SessionData {
@@ -23,45 +23,61 @@ export default class AuthRouter {
     authService: AuthService;
 
     constructor(app: Router) {
-        app.use('/auth', this.router);
-        this.router.post('/login', (req: Request, res: Response) => {
 
-            const email: string = req.body.email;
-            if (this.authService.vaildEmail(email) === false) {
-                return res
-                    .status(200)
-                    .json({ "errorCode": "vaildEmail" })
-                    .send()
+        app.use(this.router);
+
+        this.router.get('/login', (req, res) => {
+            res.render('login', {
+                user: req.session.user
+            });
+        })
+
+        this.router.post('/login', async (req: Request, res: Response) => {
+
+            if (req.fields === undefined) {
+                res.redirect('/');
+            }
+            else {
+                if (await this.authService.login(req.fields?.name, req.fields?.password)) {
+
+                    req.session.user = new SessionUser({
+                        name: req.fields?.name,
+                        isAuthenticated: true,
+                        id: req.sessionID
+                    })
+                }
             }
 
-            const sessionID: string = v4();
-
-            res
-                .status(200)
-                .cookie("sessionID", sessionID, {
-                    maxAge: 60 * 60 * 24
-                })
-                .json({
-                    "sessionID": sessionID
-                })
-                .send()
+            req.session.save(() => {
+                res.redirect('/');
+            });
 
         });
 
-        this.router.post('/sign-up', (req: Request, res: Response) => {
-            const id = req.body.id;
-            const pw = req.body.password;
-
-            // this.authService.Login(req, res);
-            req.session._id = id;
-            req.session.save();
-            console.log(id, pw)
-            res.cookie("sid", req.sessionID);
-            res.redirect("/");
+        this.router.get('/sign-up', (req, res) => {
+            res.render('signup', {
+                user: req.session.user,
+            });
         })
 
-        this.router.get('/test', async (req: Request, res: Response) => {
-            res.redirect("/");
+        this.router.post('/sign-up', async (req: Request, res: Response) => {
+            if (req.fields === undefined) {
+                res.redirect('/');
+            }
+            else {
+                const singup_check = await this.authService.singUp(req.fields?.name, req.fields.password);
+                if (singup_check) {
+                    res.redirect('/');
+                } else {
+                    console.log("회원가입 실패");
+                }
+            }
+        })
+
+        this.router.get('/logout', (req, res) => {
+            req.session.destroy((err) => {
+            });
+            res.redirect('/');
         })
     }
 }

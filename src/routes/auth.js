@@ -45,48 +45,77 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { Router } from 'express';
 import { AuthService } from '../service/AuthService.js';
-import { v4 } from 'uuid';
 import { AutoWired } from 'jypescript';
+import { SessionUser } from './SessionUser.js';
 var AuthRouter = /** @class */ (function () {
     function AuthRouter(app) {
         var _this = this;
         this.router = Router();
-        app.use('/auth', this.router);
-        this.router.post('/login', function (req, res) {
-            var email = req.body.email;
-            if (_this.authService.vaildEmail(email) === false) {
-                return res
-                    .status(200)
-                    .json({ "errorCode": "vaildEmail" })
-                    .send();
-            }
-            var sessionID = v4();
-            res
-                .status(200)
-                .cookie("sessionID", sessionID, {
-                maxAge: 60 * 60 * 24
-            })
-                .json({
-                "sessionID": sessionID
-            })
-                .send();
+        app.use(this.router);
+        this.router.get('/login', function (req, res) {
+            res.render('login', {
+                user: req.session.user
+            });
         });
-        this.router.post('/sign-up', function (req, res) {
-            var id = req.body.id;
-            var pw = req.body.password;
-            // this.authService.Login(req, res);
-            req.session._id = id;
-            req.session.save();
-            console.log(id, pw);
-            res.cookie("sid", req.sessionID);
-            res.redirect("/");
-        });
-        this.router.get('/test', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                res.redirect("/");
-                return [2 /*return*/];
+        this.router.post('/login', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        if (!(req.fields === undefined)) return [3 /*break*/, 1];
+                        res.redirect('/');
+                        return [3 /*break*/, 3];
+                    case 1: return [4 /*yield*/, this.authService.login((_a = req.fields) === null || _a === void 0 ? void 0 : _a.name, (_b = req.fields) === null || _b === void 0 ? void 0 : _b.password)];
+                    case 2:
+                        if (_d.sent()) {
+                            req.session.user = new SessionUser({
+                                name: (_c = req.fields) === null || _c === void 0 ? void 0 : _c.name,
+                                isAuthenticated: true,
+                                id: req.sessionID
+                            });
+                        }
+                        _d.label = 3;
+                    case 3:
+                        req.session.save(function () {
+                            res.redirect('/');
+                        });
+                        return [2 /*return*/];
+                }
             });
         }); });
+        this.router.get('/sign-up', function (req, res) {
+            res.render('signup', {
+                user: req.session.user,
+            });
+        });
+        this.router.post('/sign-up', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var singup_check;
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (!(req.fields === undefined)) return [3 /*break*/, 1];
+                        res.redirect('/');
+                        return [3 /*break*/, 3];
+                    case 1: return [4 /*yield*/, this.authService.singUp((_a = req.fields) === null || _a === void 0 ? void 0 : _a.name, req.fields.password)];
+                    case 2:
+                        singup_check = _b.sent();
+                        if (singup_check) {
+                            res.redirect('/');
+                        }
+                        else {
+                            console.log("회원가입 실패");
+                        }
+                        _b.label = 3;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+        this.router.get('/logout', function (req, res) {
+            req.session.destroy(function (err) {
+            });
+            res.redirect('/');
+        });
     }
     __decorate([
         AutoWired(),

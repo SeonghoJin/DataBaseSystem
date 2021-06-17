@@ -6,7 +6,7 @@ import { User } from "../domain/User.js";
 export interface UserRepository extends Repository<User> {
 
     getUserById(id: string): Promise<User[]>;
-    exist(id: string): Promise<boolean>;
+    exist(id: string, password: string): Promise<boolean>;
     insert(user: User): Promise<void>;
 
 }
@@ -23,8 +23,10 @@ export class ConcreteUserRepository implements UserRepository {
         return this.database.find({ id: id });
     }
 
-    async exist(id: string): Promise<boolean> {
-        const user: User[] = await this.database.find({ id: id });
+    async exist(id: string, password: string): Promise<boolean> {
+        const user: User[] = await this.database.find({ id: id, password: password });
+        console.log(id, password);
+        console.log(user);
         return user.length !== 0;
     }
 
