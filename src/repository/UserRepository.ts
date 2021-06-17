@@ -1,8 +1,5 @@
+import { Repository, Bean, Connect, IDatabase } from "jypescript";
 import { DBconfig } from "../config/index.js";
-import { Connect } from "../core/database/decorator/Connect.js";
-import { IDatabase } from "../core/database/interface/IDataBase.js";
-import { Repository } from "../core/database/repository/Repository.js";
-import { Bean } from "../core/Ioc/decorator/Bean.js";
 import { User } from "../domain/User.js";
 
 

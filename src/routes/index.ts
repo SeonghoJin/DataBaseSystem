@@ -109,13 +109,12 @@ router.get('/login', (req, res) => {
     });
 })
 
-
 router.post('/login', async (req: Request, res: Response) => {
     if (req.fields === undefined) {
         res.redirect('/');
     }
     else {
-        if (await authService.Login(req.fields?.name)) {
+        if (await authService.login(req.fields?.name)) {
             req.session.user = new SessionUser({
                 name: req.fields?.name,
                 isAuthenticated: true,
@@ -133,7 +132,7 @@ router.post('/sign-up', async (req: Request, res: Response) => {
     if (req.fields === undefined) {
         res.redirect('/');
     }
-    else await authService.SignUp(req.fields?.name);
+    else await authService.singUp(req.fields?.name);
     res.redirect('/');
 })
 

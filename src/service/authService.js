@@ -43,13 +43,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { AutoWired } from '../core/Ioc/decorator/Autowired.js';
+import { AutoWired } from 'jypescript';
 import { User } from '../domain/User.js';
 import { ConcreteUserRepository } from '../repository/UserRepository.js';
 var AuthService = /** @class */ (function () {
     function AuthService() {
     }
-    AuthService.prototype.Login = function (name) {
+    AuthService.prototype.login = function (name) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 if (Array.isArray(name)) {
@@ -59,7 +59,7 @@ var AuthService = /** @class */ (function () {
             });
         });
     };
-    AuthService.prototype.SignUp = function (name) {
+    AuthService.prototype.singUp = function (name) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 if (Array.isArray(name)) {
@@ -82,7 +82,7 @@ var AuthService = /** @class */ (function () {
         return spEmail.length == 2 && spEmail[1] != '';
     };
     __decorate([
-        AutoWired(ConcreteUserRepository),
+        AutoWired({ class: ConcreteUserRepository }),
         __metadata("design:type", Object)
     ], AuthService.prototype, "userRepository", void 0);
     return AuthService;

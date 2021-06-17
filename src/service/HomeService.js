@@ -7,13 +7,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { AutoWired } from '../core/Ioc/decorator/Autowired.js';
+import { AutoWired } from 'jypescript';
 import { ConcreteHomeRepository } from '../repository/HomeRepository.js';
 var AuthService = /** @class */ (function () {
     function AuthService() {
     }
     __decorate([
-        AutoWired(ConcreteHomeRepository),
+        AutoWired({
+            class: ConcreteHomeRepository
+        }),
         __metadata("design:type", Object)
     ], AuthService.prototype, "homeRepository", void 0);
     return AuthService;

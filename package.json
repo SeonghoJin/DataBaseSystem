@@ -37,7 +37,7 @@
         "express": "^4.17.1",
         "express-formidable": "^1.2.0",
         "express-session": "^1.17.1",
-        "jypescript": "^1.0.0",
+        "jypescript": "^1.0.1",
         "mysql2": "^2.2.5",
         "nedb": "^1.8.0",
         "nodemon": "^2.0.7",

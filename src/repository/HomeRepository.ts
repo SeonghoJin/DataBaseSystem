@@ -1,7 +1,5 @@
+import { Repository, Connect, IDatabase } from "jypescript";
 import { DBconfig } from "../config/index.js";
-import { Connect } from "../core/database/decorator/Connect.js";
-import { IDatabase } from "../core/database/interface/IDataBase.js";
-import { Repository } from "../core/database/repository/Repository.js";
 import { Home } from "../domain/Home.js";
 
 export interface HomeRepository extends Repository<Home> {
@@ -22,11 +20,7 @@ export class ConcreteHomeRepository implements HomeRepository {
     }
 
     async insert(item: Home): Promise<void> {
-        await this.database.insert({
-            homeIndex: item.homeIndex,
-            description: item.description,
-            title: item.title
-        })
+        await this.database.insert(item);
     }
 
     async findHomeByIndex(homeIndex: number): Promise<Home[]> {
@@ -35,7 +29,6 @@ export class ConcreteHomeRepository implements HomeRepository {
         })
         return item;
     }
-
 
     @Connect(DBconfig)
     database: IDatabase;

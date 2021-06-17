@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { AuthService } from '../service/AuthService.js';
 import { v4 } from 'uuid'
-import { AutoWired } from '../core/Ioc/decorator/Autowired.js';
+import { AutoWired } from 'jypescript';
 
 declare module 'express-session' {
     interface SessionData {

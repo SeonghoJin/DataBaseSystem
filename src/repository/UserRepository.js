@@ -43,9 +43,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+import { Bean, Connect } from "jypescript";
 import { DBconfig } from "../config/index.js";
-import { Connect } from "../core/database/decorator/Connect.js";
-import { Bean } from "../core/Ioc/decorator/Bean.js";
 var ConcreteUserRepository = /** @class */ (function () {
     function ConcreteUserRepository() {
     }

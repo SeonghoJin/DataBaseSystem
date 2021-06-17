@@ -1,22 +1,20 @@
-import { Request, Response } from 'express';
-import { AutoWired } from '../core/Ioc/decorator/Autowired.js';
-import { Bean } from '../core/Ioc/decorator/Bean.js';
+import { AutoWired } from 'jypescript';
 import { User } from '../domain/User.js';
 import { ConcreteUserRepository, UserRepository } from '../repository/UserRepository.js';
 
 export class AuthService {
 
-    @AutoWired(ConcreteUserRepository)
+    @AutoWired({ class: ConcreteUserRepository })
     userRepository: UserRepository;
 
-    public async Login(name: string | string[]) {
+    public async login(name: string | string[]) {
         if (Array.isArray(name)) {
             name = name.join('');
         }
         return this.userRepository.exist(name);
     }
 
-    public async SignUp(name: string | string[]) {
+    public async singUp(name: string | string[]) {
         if (Array.isArray(name)) {
             name = name.join('');
         }

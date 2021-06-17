@@ -1,10 +1,11 @@
-import { AutoWired } from '../core/Ioc/decorator/Autowired.js';
-import { User } from '../domain/User.js';
+import { AutoWired } from 'jypescript';
 import { ConcreteHomeRepository, HomeRepository } from '../repository/HomeRepository.js';
 
 export class AuthService {
 
-    @AutoWired(ConcreteHomeRepository)
+    @AutoWired({
+        class: ConcreteHomeRepository
+    })
     homeRepository: HomeRepository;
 
 

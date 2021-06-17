@@ -46,7 +46,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import { Router } from 'express';
 import { AuthService } from '../service/AuthService.js';
 import { v4 } from 'uuid';
-import { AutoWired } from '../core/Ioc/decorator/Autowired.js';
+import { AutoWired } from 'jypescript';
 var AuthRouter = /** @class */ (function () {
     function AuthRouter(app) {
         var _this = this;

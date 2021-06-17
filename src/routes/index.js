@@ -143,7 +143,7 @@ router.post('/login', function (req, res) { return __awaiter(void 0, void 0, voi
                 if (!(req.fields === undefined)) return [3 /*break*/, 1];
                 res.redirect('/');
                 return [3 /*break*/, 3];
-            case 1: return [4 /*yield*/, authService.Login((_a = req.fields) === null || _a === void 0 ? void 0 : _a.name)];
+            case 1: return [4 /*yield*/, authService.login((_a = req.fields) === null || _a === void 0 ? void 0 : _a.name)];
             case 2:
                 if (_c.sent()) {
                     req.session.user = new SessionUser({
@@ -169,7 +169,7 @@ router.post('/sign-up', function (req, res) { return __awaiter(void 0, void 0, v
                 if (!(req.fields === undefined)) return [3 /*break*/, 1];
                 res.redirect('/');
                 return [3 /*break*/, 3];
-            case 1: return [4 /*yield*/, authService.SignUp((_a = req.fields) === null || _a === void 0 ? void 0 : _a.name)];
+            case 1: return [4 /*yield*/, authService.singUp((_a = req.fields) === null || _a === void 0 ? void 0 : _a.name)];
             case 2:
                 _b.sent();
                 _b.label = 3;
