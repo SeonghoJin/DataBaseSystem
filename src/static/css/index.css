@@ -1,4 +1,9 @@
+@font-face {
+  font-family: "myFont";
+  src: url("../font/NanumSquareRoundL.ttf");
+}
 body {
+  font-family: "myFont";
   display: flex;
   flex-direction: column;
   align-items: center;
