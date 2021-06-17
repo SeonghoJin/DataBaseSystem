@@ -10,7 +10,7 @@
                     <p class="card-text"><%=room.description%></p>
                     <p class="card-text small">가격<%=room.price%></p>
                 </div>
-                    <% if(room.isReservation === "false"){ %>
+                    <% if(room.booker === undefined){ %>
                         <a href="/room/<%=room.rid%>" 
                             class="btn btn-primary card-btn" >예약
                         </a>

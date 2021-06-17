@@ -33,16 +33,11 @@ export default class room {
             }
             room = room[0];
 
-            if (room.isReservation === true) {
-                res.redirect('/');
-                return;
-            }
-
             await this.roomRepository.update({
                 rid: room.rid
             }, {
                 ...room,
-                isReservation: true
+                booker: req.session.user?.name
             });
 
             res.render('index', {
@@ -51,7 +46,11 @@ export default class room {
                 successReservation: true
             });
             res.status(200).send();
-        })
+        });
+
+        // this.router.delete("/:id", async (req, res) => {
+
+        // })
     }
 
 }

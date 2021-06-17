@@ -34,52 +34,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { Router } from 'express';
-import { HomeService } from '../service/HomeService.js';
-import Auth from './auth.js';
-import hotel from './hotel.js';
-import room from './room.js';
-import { SessionUser } from './SessionUser.js';
-import user from './user.js';
-var router = Router();
-new Auth(router);
-new hotel(router);
-new room(router);
-new user(router);
-var homeService = new HomeService();
-router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, _b, _c;
-    var _d;
-    return __generator(this, function (_e) {
-        switch (_e.label) {
-            case 0:
-                req.session.user = req.session.user ? req.session.user : new SessionUser({
-                    name: null,
-                    id: req.sessionID,
-                    isAuthenticated: false
-                });
-                req.session.save();
-                _b = (_a = res).render;
-                _c = ['index'];
-                _d = {
-                    user: req.session.user
-                };
-                return [4 /*yield*/, homeService.getAllHome()];
-            case 1:
-                _b.apply(_a, _c.concat([(_d.hotels = _e.sent(),
-                        _d.successReservation = false,
-                        _d)]));
+import { Router } from "express";
+var user = /** @class */ (function () {
+    function user(app) {
+        var _this = this;
+        this.router = Router();
+        app.use('/user', this.router);
+        this.router.get('/:id', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
                 return [2 /*return*/];
-        }
-    });
-}); });
-router.get('/info', function (req, res) {
-    if (req.session.user === undefined) {
-        res.redirect('/');
-        return;
+            });
+        }); });
     }
-    res.render('info', {
-        user: req.session.user
-    });
-});
-export default router;
+    return user;
+}());
+export default user;

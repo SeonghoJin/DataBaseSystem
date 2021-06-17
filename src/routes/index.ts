@@ -4,11 +4,13 @@ import Auth from './auth.js'
 import hotel from './hotel.js';
 import room from './room.js';
 import { SessionUser } from './SessionUser.js';
+import user from './user.js';
 
 const router = Router();
 new Auth(router);
 new hotel(router);
 new room(router);
+new user(router);
 
 const homeService: HomeService = new HomeService();
 

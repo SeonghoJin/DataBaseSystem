@@ -1,12 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 mt-5 bg-body rounded">
     <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+        </svg>
         <%if(user.isAuthenticated){%>
-            <a class="navbar-brand" href="/">
-                반갑습니다. <%=user.name%>님!
-            </a>
+            반갑습니다. <%=user.name%>님!
         <%}else {%>
-            <a class="navbar-brand" href="/">안전한 집을 찾아보세요!</a>
+            안전한 집을 찾아보세요!
         <% } %>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNav" aria-controls="123" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

@@ -1,13 +1,14 @@
-{"hid":1,"rid":11,"description":"1번째의 1번째","price":45000,"isReservation":true,"_id":"7zNUsVviRQWCCgl123"}
-{"hid":4,"rid":4,"description":"4번째의 4번째","price":45000,"isReservation":"false","_id":"7zNUsVviRQWCCglz"}
+{"hid":1,"rid":11,"description":"1번째의 1번째","price":45000,"_id":"7zNUsVviRQWCCgl123"}
+{"hid":4,"rid":4,"description":"4번째의 4번째","price":45000,"_id":"7zNUsVviRQWCCglz"}
 {"homeIndex":3,"description":"매우 좋습니당","roomCount":1,"title":"세번째 집","_id":"JRLpH8fXQ2AgQObI"}
-{"hid":5,"rid":6,"description":"5번째의 6번째","price":1200,"isReservation":true,"_id":"THDVBzh6Q4YBa7hQ"}
+{"hid":5,"rid":6,"description":"5번째의 6번째","price":1200,"_id":"THDVBzh6Q4YBa7hQ"}
 {"homeIndex":2,"description":"매우 좋습니당","roomCount":2,"title":"두번째 집","_id":"bzRBa1KHX9Rudl6h"}
 {"homeIndex":1,"description":"매우 좋습니당","roomCount":1,"title":"첫번째 집","_id":"cM9DMYwKx4nEo5uP"}
+{"id":"123","password":"213","_id":"fqqf5TCDK0CLyQ66"}
 {"homeIndex":5,"description":"좋습니당","roomCount":3,"title":"다섯번째 집","_id":"oUuPFVYcxZRoz13K"}
 {"homeIndex":4,"description":"매우 좋습니당","roomCount":2,"title":"네번째 집","_id":"q82HonEdQI6Eqd8Z"}
-{"hid":5,"rid":7,"description":"5번째의 7번째","price":500123,"isReservation":true,"_id":"yR3KjmxinXMi2G4i"}
-{"hid":4,"rid":5,"description":"4번째의 5번째","price":35000,"isReservation":true,"_id":"zUlGO73bdMOXlojL"}
-{"hid":1,"rid":12,"description":"1번째의 2번째","price":35000,"isReservation":true,"_id":"zUlGO73bdMOXlojLa"}
-{"hid":3,"rid":13,"description":"3번째의 1번째","price":35000,"isReservation":true,"_id":"zUlGO73bdMOXlojLab"}
-{"hid":2,"rid":132,"description":"2번째의 1번째","price":35000,"isReservation":true,"_id":"zUlGO73bdMOXlojLaba"}
+{"hid":5,"rid":7,"description":"5번째의 7번째","price":500123,"_id":"yR3KjmxinXMi2G4i"}
+{"hid":4,"rid":5,"description":"4번째의 5번째","price":35000,"_id":"zUlGO73bdMOXlojL"}
+{"hid":1,"rid":12,"description":"1번째의 2번째","price":35000,"_id":"zUlGO73bdMOXlojLa"}
+{"hid":2,"rid":132,"description":"2번째의 1번째","price":35000,"_id":"zUlGO73bdMOXlojLaba","booker":"123"}
+{"hid":3,"rid":1324,"description":"3번째의 1번째","price":35000,"_id":"zUlGO73bdMOXlojLabaa","booker":"123"}

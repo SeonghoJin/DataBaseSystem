@@ -66,9 +66,9 @@ var room = /** @class */ (function () {
         this.router.get('/:id', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
             var room, _a, _b, _c;
             var _d;
-            var _e;
-            return __generator(this, function (_f) {
-                switch (_f.label) {
+            var _e, _f;
+            return __generator(this, function (_g) {
+                switch (_g.label) {
                     case 0:
                         if (req.session.user === undefined || ((_e = req.session.user) === null || _e === void 0 ? void 0 : _e.isAuthenticated) === false) {
                             res.redirect('/');
@@ -76,21 +76,17 @@ var room = /** @class */ (function () {
                         }
                         return [4 /*yield*/, this.roomRepository.findRoomByIndex(Number(req.params.id))];
                     case 1:
-                        room = (_f.sent());
+                        room = (_g.sent());
                         if (room.length === 0) {
                             res.redirect('/');
                             return [2 /*return*/];
                         }
                         room = room[0];
-                        if (room.isReservation === true) {
-                            res.redirect('/');
-                            return [2 /*return*/];
-                        }
                         return [4 /*yield*/, this.roomRepository.update({
                                 rid: room.rid
-                            }, __assign(__assign({}, room), { isReservation: true }))];
+                            }, __assign(__assign({}, room), { booker: (_f = req.session.user) === null || _f === void 0 ? void 0 : _f.name }))];
                     case 2:
-                        _f.sent();
+                        _g.sent();
                         _b = (_a = res).render;
                         _c = ['index'];
                         _d = {
@@ -98,7 +94,7 @@ var room = /** @class */ (function () {
                         };
                         return [4 /*yield*/, this.homeRepository.getAllData()];
                     case 3:
-                        _b.apply(_a, _c.concat([(_d.hotels = (_f.sent()),
+                        _b.apply(_a, _c.concat([(_d.hotels = (_g.sent()),
                                 _d.successReservation = true,
                                 _d)]));
                         res.status(200).send();
@@ -106,6 +102,8 @@ var room = /** @class */ (function () {
                 }
             });
         }); });
+        // this.router.delete("/:id", async (req, res) => {
+        // })
     }
     __decorate([
         AutoWired({
