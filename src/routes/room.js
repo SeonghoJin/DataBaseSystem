@@ -43,26 +43,62 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { AutoWired } from 'jypescript';
-import { ConcreteHomeRepository } from '../repository/HomeRepository.js';
-var HomeService = /** @class */ (function () {
-    function HomeService() {
+import { Router } from "express";
+import { AutoWired } from "jypescript";
+import { ConcreteHomeRepository } from "../repository/HomeRepository.js";
+import { ConcreteRoomRepository } from "../repository/RoomRepository.js";
+var room = /** @class */ (function () {
+    function room(app) {
         var _this = this;
-        this.getAllHome = function () { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.homeRepository.getAllData()];
-                    case 1: return [2 /*return*/, _a.sent()];
+        this.router = Router();
+        app.use('/room', this.router);
+        this.router.get('/:id', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var room, _a, _b, _c;
+            var _d;
+            var _e;
+            return __generator(this, function (_f) {
+                switch (_f.label) {
+                    case 0:
+                        if (req.session.user === undefined || ((_e = req.session.user) === null || _e === void 0 ? void 0 : _e.isAuthenticated) === false) {
+                            res.redirect('/');
+                            return [2 /*return*/];
+                        }
+                        return [4 /*yield*/, this.roomRepository.findRoomByIndex(Number(req.params.id))];
+                    case 1:
+                        room = (_f.sent());
+                        if (room.length === 0) {
+                            res.redirect('/');
+                            return [2 /*return*/];
+                        }
+                        room = room[0];
+                        _b = (_a = res).render;
+                        _c = ['index'];
+                        _d = {
+                            user: req.session.user
+                        };
+                        return [4 /*yield*/, this.homeRepository.getAllData()];
+                    case 2:
+                        _b.apply(_a, _c.concat([(_d.hotels = (_f.sent()),
+                                _d.successReservation = true,
+                                _d)]));
+                        res.status(200).send();
+                        return [2 /*return*/];
                 }
             });
-        }); };
+        }); });
     }
     __decorate([
         AutoWired({
             class: ConcreteHomeRepository
         }),
         __metadata("design:type", Object)
-    ], HomeService.prototype, "homeRepository", void 0);
-    return HomeService;
+    ], room.prototype, "homeRepository", void 0);
+    __decorate([
+        AutoWired({
+            class: ConcreteRoomRepository
+        }),
+        __metadata("design:type", Object)
+    ], room.prototype, "roomRepository", void 0);
+    return room;
 }());
-export { HomeService };
+export default room;

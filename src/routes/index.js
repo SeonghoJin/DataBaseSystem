@@ -35,14 +35,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { Router } from 'express';
-import { ConcreteHomeRepository } from '../repository/HomeRepository.js';
-import { ConcreteRoomRepository } from '../repository/RoomRepository.js';
+import { HomeService } from '../service/HomeService.js';
 import Auth from './auth.js';
+import hotel from './hotel.js';
+import room from './room.js';
 import { SessionUser } from './SessionUser.js';
 var router = Router();
 new Auth(router);
-var homeRepository = new ConcreteHomeRepository();
-var roomRepository = new ConcreteRoomRepository();
+new hotel(router);
+new room(router);
+var homeService = new HomeService();
 router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, _b, _c;
     var _d;
@@ -60,7 +62,7 @@ router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 _d = {
                     user: req.session.user
                 };
-                return [4 /*yield*/, homeRepository.getAllData()];
+                return [4 /*yield*/, homeService.getAllHome()];
             case 1:
                 _b.apply(_a, _c.concat([(_d.hotels = _e.sent(),
                         _d.successReservation = false,
@@ -78,61 +80,4 @@ router.get('/info', function (req, res) {
         user: req.session.user
     });
 });
-router.get('/hotel/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var home, rooms;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, homeRepository.findHomeByIndex(Number(req.params.id))];
-            case 1:
-                home = (_a.sent());
-                if (home.length === 0) {
-                    res.redirect('/');
-                    return [2 /*return*/];
-                }
-                home = home[0];
-                return [4 /*yield*/, roomRepository.findRoomByHomeIndex(home.homeIndex)];
-            case 2:
-                rooms = (_a.sent());
-                res.render('hotel', {
-                    user: req.session.user,
-                    rooms: rooms
-                });
-                return [2 /*return*/];
-        }
-    });
-}); });
-router.get('/room/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var room, _a, _b, _c;
-    var _d;
-    var _e;
-    return __generator(this, function (_f) {
-        switch (_f.label) {
-            case 0:
-                if (req.session.user === undefined || ((_e = req.session.user) === null || _e === void 0 ? void 0 : _e.isAuthenticated) === false) {
-                    res.redirect('/');
-                    return [2 /*return*/];
-                }
-                return [4 /*yield*/, roomRepository.findRoomByIndex(Number(req.params.id))];
-            case 1:
-                room = (_f.sent());
-                if (room.length === 0) {
-                    res.redirect('/');
-                    return [2 /*return*/];
-                }
-                room = room[0];
-                _b = (_a = res).render;
-                _c = ['index'];
-                _d = {
-                    user: req.session.user
-                };
-                return [4 /*yield*/, homeRepository.getAllData()];
-            case 2:
-                _b.apply(_a, _c.concat([(_d.hotels = (_f.sent()),
-                        _d.successReservation = true,
-                        _d)]));
-                res.status(200).send();
-                return [2 /*return*/];
-        }
-    });
-}); });
 export default router;

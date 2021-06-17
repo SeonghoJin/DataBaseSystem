@@ -43,26 +43,51 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { AutoWired } from 'jypescript';
-import { ConcreteHomeRepository } from '../repository/HomeRepository.js';
-var HomeService = /** @class */ (function () {
-    function HomeService() {
+import { Router } from "express";
+import { AutoWired } from "jypescript";
+import { ConcreteHomeRepository } from "../repository/HomeRepository.js";
+import { ConcreteRoomRepository } from "../repository/RoomRepository.js";
+var hotel = /** @class */ (function () {
+    function hotel(app) {
         var _this = this;
-        this.getAllHome = function () { return __awaiter(_this, void 0, void 0, function () {
+        this.router = Router();
+        app.use('/hotel', this.router);
+        this.router.get('/:id', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var home, rooms;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.homeRepository.getAllData()];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 0: return [4 /*yield*/, this.homeRepository.findHomeByIndex(Number(req.params.id))];
+                    case 1:
+                        home = (_a.sent());
+                        if (home.length === 0) {
+                            res.redirect('/');
+                            return [2 /*return*/];
+                        }
+                        home = home[0];
+                        return [4 /*yield*/, this.roomRepository.findRoomByHomeIndex(home.homeIndex)];
+                    case 2:
+                        rooms = (_a.sent());
+                        res.render('hotel', {
+                            user: req.session.user,
+                            rooms: rooms
+                        });
+                        return [2 /*return*/];
                 }
             });
-        }); };
+        }); });
     }
     __decorate([
         AutoWired({
             class: ConcreteHomeRepository
         }),
         __metadata("design:type", Object)
-    ], HomeService.prototype, "homeRepository", void 0);
-    return HomeService;
+    ], hotel.prototype, "homeRepository", void 0);
+    __decorate([
+        AutoWired({
+            class: ConcreteRoomRepository
+        }),
+        __metadata("design:type", Object)
+    ], hotel.prototype, "roomRepository", void 0);
+    return hotel;
 }());
-export { HomeService };
+export default hotel;
