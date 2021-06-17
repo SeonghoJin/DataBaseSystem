@@ -90,24 +90,28 @@ var AuthRouter = /** @class */ (function () {
         });
         this.router.post('/sign-up', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
             var singup_check;
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0:
                         if (!(req.fields === undefined)) return [3 /*break*/, 1];
                         res.redirect('/');
-                        return [3 /*break*/, 3];
-                    case 1: return [4 /*yield*/, this.authService.singUp((_a = req.fields) === null || _a === void 0 ? void 0 : _a.name, req.fields.password)];
-                    case 2:
-                        singup_check = _b.sent();
+                        return [3 /*break*/, 4];
+                    case 1:
+                        if (!(((_a = req.fields) === null || _a === void 0 ? void 0 : _a.password) !== ((_b = req.fields) === null || _b === void 0 ? void 0 : _b.password_check))) return [3 /*break*/, 2];
+                        res.redirect('/');
+                        return [3 /*break*/, 4];
+                    case 2: return [4 /*yield*/, this.authService.singUp((_c = req.fields) === null || _c === void 0 ? void 0 : _c.name, req.fields.password)];
+                    case 3:
+                        singup_check = _d.sent();
                         if (singup_check) {
                             res.redirect('/');
                         }
                         else {
                             console.log("회원가입 실패");
                         }
-                        _b.label = 3;
-                    case 3: return [2 /*return*/];
+                        _d.label = 4;
+                    case 4: return [2 /*return*/];
                 }
             });
         }); });

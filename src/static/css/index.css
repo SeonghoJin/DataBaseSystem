@@ -20,11 +20,7 @@ ul {
   padding: 50px;
 }
 
-#name_input {
-  margin-bottom: 20px;
-}
-
-#password_input {
+.auth-form-container input {
   margin-bottom: 20px;
 }
 

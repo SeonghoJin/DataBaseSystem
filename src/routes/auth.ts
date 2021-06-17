@@ -64,6 +64,9 @@ export default class AuthRouter {
             if (req.fields === undefined) {
                 res.redirect('/');
             }
+            else if (req.fields?.password !== req.fields?.password_check) {
+                res.redirect('/');
+            }
             else {
                 const singup_check = await this.authService.singUp(req.fields?.name, req.fields.password);
                 if (singup_check) {
