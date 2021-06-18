@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { ConcreteDangerZoneRepository, DangerZoneRepository } from '../repository/DangerZoneRepository.js';
 import { HomeService } from '../service/HomeService.js';
 import Auth from './auth.js'
+import comment from './comment.js';
 import hotel from './hotel.js';
 import room from './room.js';
 import { SessionUser } from './SessionUser.js';
@@ -14,6 +15,7 @@ new hotel(router);
 new room(router);
 new user(router);
 new zone(router);
+new comment(router);
 const homeService: HomeService = new HomeService();
 
 declare module 'express-session' {

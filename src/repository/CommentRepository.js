@@ -1,3 +1,12 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,56 +43,46 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { Router } from 'express';
-import { HomeService } from '../service/HomeService.js';
-import Auth from './auth.js';
-import comment from './comment.js';
-import hotel from './hotel.js';
-import room from './room.js';
-import { SessionUser } from './SessionUser.js';
-import user from './user.js';
-import zone from './zone.js';
-var router = Router();
-new Auth(router);
-new hotel(router);
-new room(router);
-new user(router);
-new zone(router);
-new comment(router);
-var homeService = new HomeService();
-router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, _b, _c;
-    var _d;
-    return __generator(this, function (_e) {
-        switch (_e.label) {
-            case 0:
-                req.session.user = req.session.user ? req.session.user : new SessionUser({
-                    name: null,
-                    id: req.sessionID,
-                    isAuthenticated: false
-                });
-                req.session.save();
-                _b = (_a = res).render;
-                _c = ['index'];
-                _d = {
-                    user: req.session.user
-                };
-                return [4 /*yield*/, homeService.getAllHome()];
-            case 1:
-                _b.apply(_a, _c.concat([(_d.hotels = _e.sent(),
-                        _d.successReservation = false,
-                        _d)]));
-                return [2 /*return*/];
-        }
-    });
-}); });
-router.get('/info', function (req, res) {
-    if (req.session.user === undefined) {
-        res.redirect('/');
-        return;
+import { Connect } from "jypescript";
+import { DBconfig } from "../config/index.js";
+var ConcreteCommentRepository = /** @class */ (function () {
+    function ConcreteCommentRepository() {
     }
-    res.render('info', {
-        user: req.session.user
-    });
-});
-export default router;
+    ConcreteCommentRepository.prototype.findByUid = function (uid) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.database.find({
+                            uid: uid,
+                        })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    ConcreteCommentRepository.prototype.insert = function (comment) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.database.insert(comment)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ConcreteCommentRepository.prototype.delete = function (cid) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/];
+            });
+        });
+    };
+    __decorate([
+        Connect(DBconfig),
+        __metadata("design:type", Object)
+    ], ConcreteCommentRepository.prototype, "database", void 0);
+    return ConcreteCommentRepository;
+}());
+export { ConcreteCommentRepository };

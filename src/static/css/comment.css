@@ -1,0 +1,12 @@
+.comment-input-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-contents {
+  margin-bottom: 20px;
+}
+
+.comment-input {
+  width: 85%;
+}
