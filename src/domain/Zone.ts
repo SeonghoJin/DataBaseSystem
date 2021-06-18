@@ -1,14 +1,10 @@
 export class Zone {
 
-    latitude: number;
-    longitude: number;
     name?: string;
     zid: number;
     constructor({
-        latitude, longitude, name, zid
-    }: { latitude: number, longitude: number, name?: string, zid: number }) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+        name, zid
+    }: { name?: string, zid: number }) {
         this.zid = zid;
         this.name = name;
     }
