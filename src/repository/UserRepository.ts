@@ -8,7 +8,7 @@ export interface UserRepository extends Repository<User> {
     getUserById(id: string): Promise<User[]>;
     exist(id: string, password: string): Promise<boolean>;
     insert(user: User): Promise<void>;
-
+    findAll(): Promise<any>
 }
 
 @Bean()
@@ -18,6 +18,11 @@ export class ConcreteUserRepository implements UserRepository {
     database: IDatabase;
 
     constructor() {
+    }
+    async findAll(): Promise<any> {
+        return (await this.database.getAllData()).filter((user) => {
+            return user.id !== undefined && user.password !== undefined
+        })
     }
     async getUserById(id: string): Promise<User[]> {
         return this.database.find({ id: id });

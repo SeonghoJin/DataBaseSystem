@@ -4,14 +4,14 @@ export class Room {
     rid: number | undefined;
     description: string | undefined;
     price: number | undefined;
-    booker: string | null;
+    booker: string | null | undefined;
 
     constructor({ hid, rid, description, price, booker }: {
         hid: number | undefined,
         rid: number | undefined,
         description: string | undefined,
         price: number | undefined,
-        booker: string | null;
+        booker: string | null | undefined;
     }) {
         this.hid = hid;
         this.rid = rid;

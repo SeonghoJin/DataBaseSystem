@@ -6,9 +6,16 @@ export interface CommentRepository extends Repository<Comment> {
     findByhid(hcid: string): Promise<Comment[]>;
     insert(comment: Comment): Promise<void>;
     delete(cid: string): Promise<void>;
+    findAll(): Promise<Comment[]>;
 }
 
 export class ConcreteCommentRepository implements CommentRepository {
+
+    async findAll(): Promise<Comment[]> {
+        return (await this.database.getAllData()).filter((data) => {
+            return data.hcid !== undefined;
+        });
+    }
 
     async findByhid(hid: string): Promise<Comment[]> {
         return await this.database.find({

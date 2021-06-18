@@ -48,6 +48,18 @@ import { DBconfig } from "../config/index.js";
 var ConcreteCommentRepository = /** @class */ (function () {
     function ConcreteCommentRepository() {
     }
+    ConcreteCommentRepository.prototype.findAll = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.database.getAllData()];
+                    case 1: return [2 /*return*/, (_a.sent()).filter(function (data) {
+                            return data.hcid !== undefined;
+                        })];
+                }
+            });
+        });
+    };
     ConcreteCommentRepository.prototype.findByhid = function (hid) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {

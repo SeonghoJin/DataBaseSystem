@@ -86,10 +86,9 @@ var ConcreteZoneRepository = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.database.getAllData()];
                     case 1:
                         items = _a.sent();
-                        items.filter(function (item) {
-                            return item.zid !== undefined;
-                        });
-                        return [2 /*return*/, items];
+                        return [2 /*return*/, items.filter(function (item) {
+                                return item.zid !== undefined;
+                            })];
                 }
             });
         });

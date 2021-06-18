@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { ConcreteDangerZoneRepository, DangerZoneRepository } from '../repository/DangerZoneRepository.js';
 import { HomeService } from '../service/HomeService.js';
+import { admin } from './admin.js';
 import Auth from './auth.js'
 import comment from './comment.js';
 import hotel from './hotel.js';
@@ -16,6 +17,7 @@ new room(router);
 new user(router);
 new zone(router);
 new comment(router);
+new admin(router);
 const homeService: HomeService = new HomeService();
 
 declare module 'express-session' {
@@ -39,6 +41,12 @@ router.get('/', async (req, res) => {
     });
 
     req.session.save();
+
+    if (req.session.user.name === "admin") {
+        res.redirect('/admin');
+        return;
+    }
+
     res.render('index', {
         user: req.session.user,
         hotels: await homeService.getAllHome(),
@@ -56,5 +64,6 @@ router.get('/info', (req, res) => {
         user: req.session.user
     })
 })
+
 
 export default router;

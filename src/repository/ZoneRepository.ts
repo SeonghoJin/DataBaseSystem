@@ -26,10 +26,9 @@ export class ConcreteZoneRepository implements ZoneRepository {
 
     async findAll(): Promise<Zone[]> {
         const items = await this.database.getAllData()
-        items.filter((item: Zone) => {
+        return items.filter((item: Zone) => {
             return item.zid !== undefined
         });
-        return items;
     }
 
     @Connect(DBconfig)

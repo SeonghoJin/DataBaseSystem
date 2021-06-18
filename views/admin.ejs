@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%-include('head')%>
+</head>
+<body>
+    <%-include('nav')%>
+    <div class="d-flex align-items-start" style="align-self: flex-start; width:100%">
+    <div class="nav flex-column nav-pills me-3" style="width:15%"id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <button 
+            class="nav-link active" 
+            id="v-pills-users-tab" 
+            data-bs-toggle="pill" 
+            data-bs-target="#v-pills-users" 
+            type="button" 
+            role="tab" 
+            aria-controls="v-pills-users" 
+            aria-selected="true">
+            사용자 목록
+        </button>
+        <button 
+        class="nav-link" 
+        id="v-pills-comments-tab" 
+        data-bs-toggle="pill" 
+        data-bs-target="#v-pills-comments" 
+        type="button" 
+        role="tab" 
+        aria-controls="v-pills-comments"
+        aria-selected="false">
+            댓글 목록
+        </button>
+        <button 
+        class="nav-link" 
+        id="v-pills-dangerzones-tab" 
+        data-bs-toggle="pill" 
+        data-bs-target="#v-pills-dangerzones" 
+        type="button" 
+        role="tab" 
+        aria-controls="v-pills-dangerzones" 
+        aria-selected="false">
+            위험 지역 목록
+        </button>
+        <button 
+        class="nav-link" 
+        id="v-pills-homes-tab" 
+        data-bs-toggle="pill" 
+        data-bs-target="#v-pills-homes" 
+        type="button" 
+        role="tab" 
+        aria-controls="v-pills-homes" 
+        aria-selected="false">
+            숙박 업소 목록
+        </button>
+        <button 
+        class="nav-link" 
+        id="v-pills-rooms-tab" 
+        data-bs-toggle="pill" 
+        data-bs-target="#v-pills-rooms" 
+        type="button" 
+        role="tab" 
+        aria-controls="v-pills-rooms" 
+        aria-selected="false">
+            방 목록
+        </button>
+    </div>
+    <div class="tab-content" id="v-pills-tabContent" style="width:90%">
+        <div class="tab-pane fade show active" 
+        id="v-pills-users" 
+        role="tabpanel" 
+        aria-labelledby="v-pills-users-tab"
+        style="width:100%">
+            <ul class="list-group list-group-flush shadow">
+                <%for(let i = 0; i < users.length; i++){%>
+                <li
+                    class="list-group-item admin-content">
+                    <%=users[i].id%>
+                    <%if(users[i].id === "admin"){%>
+                        <button id=<%=users[i]._id%> type="button" class="btn btn-danger disabled" onclick="deleteResource(this)">삭제</button>
+                    <% } else {%>
+                        <button id=<%=users[i]._id%> type="button" class="btn btn-danger" onclick="deleteResource(this)">삭제</button>
+                    <%}%>
+                </li>
+                <%}%>
+            </ul>
+        </div>
+        <div class="tab-pane fade show" 
+        id="v-pills-comments" 
+        role="tabpanel" 
+        aria-labelledby="v-pills-home-comments">
+            <ul class="list-group list-group-flush shadow">
+                <%for(let i = 0; i < comments.length; i++){%>
+                <li 
+                    class="list-group-item admin-content">
+                    <%=comments[i].value%>-<%=comments[i].uid%>
+                    <button id=<%=comments[i]._id%> type="button" class="btn btn-danger" onclick="deleteResource(this)">삭제</button>
+                </li>
+                <%}%>
+            </ul>
+        </div>
+        <div class="tab-pane fade show" 
+        id="v-pills-dangerzones" 
+        role="tabpanel" 
+        aria-labelledby="v-pills-home-tab">
+            <ul class="list-group list-group-flush shadow">
+                <%for(let i = 0; i < dangerzones.length; i++){%>
+                <li
+                    class="list-group-item admin-content">
+                    <%=dangerzones[i].zoneName%>
+                    <button id=<%=dangerzones[i]._id%> type="button" class="btn btn-danger"onclick="deleteResource(this)">삭제</button>
+                </li>
+                <%}%>
+            </ul>
+            <div class="comment-input-container mt-3 bg-white rounded admin-input-group shadow">
+                <div class="input-group">
+                    <select class="form-select" id="select-danger-zone" aria-label="Example select with button addon">
+                        <option selected>선택해주세요!</option>
+                        <option value="1">서울특별시</option>
+                        <option value="2">부산광역시</option>
+                        <option value="3">대구광역시</option>
+                        <option value="4">인천광역시</option>
+                        <option value="5">광주광역시</option>
+                        <option value="6">대전광역시</option>
+                        <option value="7">울산광역시</option>
+                        <option value="8">세종특별자치시</option>
+                    </select>
+                    <button class="btn btn-primary" type="button" onclick="addDangerZone()">추가</button>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade show" 
+        id="v-pills-homes" 
+        role="tabpanel" 
+        aria-labelledby="v-pills-homes-tab">
+            <ul class="list-group list-group-flush shadow">
+                <%for(let i = 0; i < homes.length; i++){%>
+                <li 
+                    class="list-group-item admin-content">
+                    <%=homes[i].title%>
+                    <div>
+                        <button id=<%=homes[i]._id%> type="button" data-bs-toggle="modal" data-bs-target="#id<%=homes[i]._id%>-modal" class="btn btn-primary">방추가</button>
+                        <button id=<%=homes[i]._id%> type="button" class="btn btn-danger"onclick="deleteResource(this)">삭제</button>
+                        <div class="modal fade" id="id<%=homes[i]._id%>-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"><%=homes[i].title%>에 방을 추가하세요!</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control input-room-index id-<%=homes[i]._id%>" placeholder="homeIndex" aria-label="Username" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control input-room-price id-<%=homes[i]._id%>" placeholder="price" aria-label="Username" aria-describedby="basic-addon1">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">description</span> 
+                                            <input type="text" class="form-control input-room-description id-<%=homes[i]._id%>"  
+                                            aria-label="Username" aria-describedby="basic-addon1"
+                                            style="height:100px;">
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                    <button type="button" class="btn btn-primary" onclick="addRoom('<%=homes[i]._id%>')">방추가</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>                  
+                    </div>
+                </li>
+                <%}%>
+            </ul>
+            <div class="comment-input-container mt-3 bg-white rounded admin-input-group shadow">
+                <div class="input-group mb-3">
+                    <select class="form-select" id="select-zone" aria-label="Example select with button addon">
+                        <option selected>선택해주세요!</option>
+                        <option value="1">서울특별시</option>
+                        <option value="2">부산광역시</option>
+                        <option value="3">대구광역시</option>
+                        <option value="4">인천광역시</option>
+                        <option value="5">광주광역시</option>
+                        <option value="6">대전광역시</option>
+                        <option value="7">울산광역시</option>
+                        <option value="8">세종특별자치시</option>
+                    </select>
+                    <input type="text" class="form-control input-home-index" placeholder="homeIndex" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control input-title" placeholder="title" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">description</span> 
+                    <input type="text" class="form-control input-description"  
+                    aria-label="Username" aria-describedby="basic-addon1"
+                    style="height:100px;">
+                </div>
+                <button class="btn btn-primary" type="button" onclick="addHome()"style="width:10%; align-self: flex-end;">추가</button>
+            </div>
+        </div>
+        <div class="tab-pane fade show" 
+        id="v-pills-rooms" 
+        role="tabpanel" 
+        aria-labelledby="v-pills-rooms-tab">
+            <ul class="list-group list-group-flush shadow">
+                <%for(let i = 0; i < rooms.length; i++){%>
+                <li 
+                    class="list-group-item admin-content">
+                    <%=rooms[i].description%>
+                    <%if(rooms[i].booker !== undefined){%>
+                        -<%=rooms[i].booker%>님이 예약중입니다.
+                    <%}%>
+                    <button id=<%=rooms[i]._id%> type="button" class="btn btn-danger"onclick="deleteResource(this)">
+                        삭제
+                    </button>
+                </li>
+                <%}%>
+            </ul>
+        </div>
+    </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function deleteResource(target){
+        $.ajax({
+            url : "/admin/id",
+            type : "DELETE",
+            data : {
+                id : target.id
+            },
+            success : (data) => {
+                if(data === "OK"){
+                    location.reload();
+                }
+            }
+        });
+    }
+    const select_danger_zone = document.querySelector("#select-danger-zone");
+
+    function addDangerZone(){
+        if(select_danger_zone.value === "선택해주세요!")return;
+        $.ajax({
+            url : "/admin/dangerzone",
+            type : "POST",
+            data : {
+                dangerZoneId : select_danger_zone.value
+            },
+            success:(data) => {
+                if(data === "OK"){
+                    location.reload();
+                }
+            }
+        })
+    }
+
+    const select_zone = document.querySelector('#select-zone');
+    const input_title = document.querySelector('.input-title');
+    const input_home_index = document.querySelector('.input-home-index');
+    const input_description = document.querySelector('.input-description');
+
+    function addHome(){
+        if(select_zone.value === "선택해주세요!")return;
+        if(input_title.value === "")return;
+        if(input_home_index.value === "")return;
+        if(input_description.value === "")return;
+        $.ajax({
+            url : "/admin/home",
+            type : "POST",
+            data : {
+                zoneId : select_zone.value,
+                title : input_title.value,
+                homeIndex : input_home_index.value,
+                description : input_description.value
+            },
+            success : (data) => {
+                if(data === "OK"){
+                    location.reload();
+                }
+            }
+        });
+    }
+
+    function addRoom(homeId){
+        const input_room_description = document.querySelector(`.input-room-description.id-${homeId}`);
+        const input_room_index = document.querySelector(`.input-room-index.id-${homeId}`);
+        const input_room_price = document.querySelector(`.input-room-price.id-${homeId}`);
+        if(homeId === "")return;
+        if(input_room_index.value === "")return;
+        if(input_room_description.value === "")return;
+        if(input_room_price.value === "")return;
+        console.log();
+        $.ajax({
+            url:"/admin/room",
+            type:"POST",
+            data : {
+                hid : homeId,
+                rid : input_room_index.value,
+                description : input_room_description.value,
+                price : input_room_price.value
+            },
+            success : (data) => {
+                if(data === "OK"){
+                    location.reload();
+                }
+            }
+        })
+
+    }
+</script>
+</html>

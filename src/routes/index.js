@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { Router } from 'express';
 import { HomeService } from '../service/HomeService.js';
+import { admin } from './admin.js';
 import Auth from './auth.js';
 import comment from './comment.js';
 import hotel from './hotel.js';
@@ -50,6 +51,7 @@ new room(router);
 new user(router);
 new zone(router);
 new comment(router);
+new admin(router);
 var homeService = new HomeService();
 router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, _b, _c;
@@ -63,6 +65,10 @@ router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, f
                     isAuthenticated: false
                 });
                 req.session.save();
+                if (req.session.user.name === "admin") {
+                    res.redirect('/admin');
+                    return [2 /*return*/];
+                }
                 _b = (_a = res).render;
                 _c = ['index'];
                 _d = {
