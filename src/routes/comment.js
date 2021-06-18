@@ -87,6 +87,15 @@ var comment = /** @class */ (function () {
                 }
             });
         }); });
+        this.router.delete('', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var cid;
+            var _a;
+            return __generator(this, function (_b) {
+                cid = (_a = req.fields) === null || _a === void 0 ? void 0 : _a.cid;
+                res.sendStatus(200);
+                return [2 /*return*/];
+            });
+        }); });
     }
     __decorate([
         AutoWired({

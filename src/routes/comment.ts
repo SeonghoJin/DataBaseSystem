@@ -39,5 +39,10 @@ export default class comment {
             res.sendStatus(200);
         })
 
+        this.router.delete('', async (req, res) => {
+            const cid = req.fields?.cid;
+            res.sendStatus(200);
+        })
+
     }
 }
