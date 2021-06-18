@@ -24,3 +24,8 @@
 {"hid":1,"rid":12,"description":"1번째의 2번째","price":35000,"_id":"zUlGO73bdMOXlojLa"}
 {"hid":2,"rid":132,"description":"2번째의 1번째","price":35000,"_id":"zUlGO73bdMOXlojLaba"}
 {"hid":3,"rid":1324,"description":"3번째의 1번째","price":35000,"_id":"zUlGO73bdMOXlojLabaa","booker":"이성호"}
+{"hid":2,"rid":132,"description":"2번째의 1번째","price":35000,"_id":"zUlGO73bdMOXlojLaba","booker":"진성호"}
+{"hid":2,"rid":132,"description":"2번째의 1번째","price":35000,"_id":"zUlGO73bdMOXlojLaba"}
+{"hid":2,"rid":132,"description":"2번째의 1번째","price":35000,"_id":"zUlGO73bdMOXlojLaba","booker":"진성호"}
+{"hid":2,"rid":132,"description":"2번째의 1번째","price":35000,"_id":"zUlGO73bdMOXlojLaba"}
+{"hid":4,"rid":4,"description":"4번째의 4번째","price":45000,"_id":"7zNUsVviRQWCCglz","booker":"진성호"}

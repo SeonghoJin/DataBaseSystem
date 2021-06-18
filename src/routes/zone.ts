@@ -2,6 +2,7 @@ import { Router } from "express";
 import { AutoWired } from "jypescript";
 import { ConcreteHomeRepository, HomeRepository } from "../repository/HomeRepository.js";
 import { ConcreteZoneRepository, ZoneRepository } from "../repository/ZoneRepository.js";
+import { HomeService } from "../service/HomeService.js";
 
 export default class zone {
     router: Router = Router();
@@ -11,23 +12,18 @@ export default class zone {
     })
     zoneRepository: ZoneRepository;
 
-    @AutoWired({
-        class: ConcreteHomeRepository
-    })
-    homeRepository: HomeRepository;
+    @AutoWired()
+    homeService: HomeService;
 
     constructor(app: Router) {
         app.use('/zone', this.router);
 
         this.router.get("/:id", async (req, res) => {
             const zid = req.params.id;
-            const zoneName = await (await this.zoneRepository.findById(Number(zid))).name;
-            const homes = await this.homeRepository.findByZoneIndex(Number(zid));
             res.render('index', {
                 user: req.session.user,
-                hotels: homes,
+                hotels: await this.homeService.getHomeByZoneIndex(zid),
                 successReservation: false,
-                zoneName: zoneName
             })
         })
 

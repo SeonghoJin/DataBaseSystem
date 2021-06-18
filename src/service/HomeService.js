@@ -1,3 +1,14 @@
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -44,15 +55,50 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { AutoWired } from 'jypescript';
+import { ConcreteDangerZoneRepository } from '../repository/DangerZoneRepository.js';
 import { ConcreteHomeRepository } from '../repository/HomeRepository.js';
 var HomeService = /** @class */ (function () {
     function HomeService() {
         var _this = this;
         this.getAllHome = function () { return __awaiter(_this, void 0, void 0, function () {
+            var homes;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.homeRepository.getAllData()];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 1:
+                        homes = _a.sent();
+                        return [4 /*yield*/, this.addDanagerZoneProperty(homes)];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.getHomeByZoneIndex = function (zid) { return __awaiter(_this, void 0, void 0, function () {
+            var homes;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.homeRepository.findByZoneIndex(Number(zid))];
+                    case 1:
+                        homes = _a.sent();
+                        return [4 /*yield*/, this.addDanagerZoneProperty(homes)];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.addDanagerZoneProperty = function (homes) { return __awaiter(_this, void 0, void 0, function () {
+            var dangerZones;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.dangerZoneRepository.findAll()];
+                    case 1:
+                        dangerZones = _a.sent();
+                        homes = homes.map(function (home) {
+                            var danagerZoneId = dangerZones.find(function (dangerZone) {
+                                return dangerZone.dangerZoneId === home.zoneId;
+                            });
+                            var danger = danagerZoneId !== undefined;
+                            return __assign(__assign({}, home), { danger: danger });
+                        });
+                        return [2 /*return*/, homes];
                 }
             });
         }); };
@@ -63,6 +109,12 @@ var HomeService = /** @class */ (function () {
         }),
         __metadata("design:type", Object)
     ], HomeService.prototype, "homeRepository", void 0);
+    __decorate([
+        AutoWired({
+            class: ConcreteDangerZoneRepository
+        }),
+        __metadata("design:type", ConcreteDangerZoneRepository)
+    ], HomeService.prototype, "dangerZoneRepository", void 0);
     return HomeService;
 }());
 export { HomeService };

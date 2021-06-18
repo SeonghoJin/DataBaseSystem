@@ -1,6 +1,4 @@
 import { Router } from 'express';
-import { AutoWired } from 'jypescript';
-import { DangerZone } from '../domain/DangerZone.js';
 import { ConcreteDangerZoneRepository, DangerZoneRepository } from '../repository/DangerZoneRepository.js';
 import { HomeService } from '../service/HomeService.js';
 import Auth from './auth.js'
@@ -17,7 +15,6 @@ new room(router);
 new user(router);
 new zone(router);
 const homeService: HomeService = new HomeService();
-const dangerZoneRepository: DangerZoneRepository = new ConcreteDangerZoneRepository();
 
 declare module 'express-session' {
     interface SessionData {
@@ -40,6 +37,7 @@ router.get('/', async (req, res) => {
     });
 
     req.session.save();
+
     res.render('index', {
         user: req.session.user,
         hotels: await homeService.getAllHome(),

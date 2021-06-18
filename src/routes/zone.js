@@ -45,32 +45,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { Router } from "express";
 import { AutoWired } from "jypescript";
-import { ConcreteHomeRepository } from "../repository/HomeRepository.js";
 import { ConcreteZoneRepository } from "../repository/ZoneRepository.js";
+import { HomeService } from "../service/HomeService.js";
 var zone = /** @class */ (function () {
     function zone(app) {
         var _this = this;
         this.router = Router();
         app.use('/zone', this.router);
         this.router.get("/:id", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-            var zid, zoneName, homes;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var zid, _a, _b, _c;
+            var _d;
+            return __generator(this, function (_e) {
+                switch (_e.label) {
                     case 0:
                         zid = req.params.id;
-                        return [4 /*yield*/, this.zoneRepository.findById(Number(zid))];
-                    case 1: return [4 /*yield*/, (_a.sent()).name];
-                    case 2:
-                        zoneName = _a.sent();
-                        return [4 /*yield*/, this.homeRepository.findByZoneIndex(Number(zid))];
-                    case 3:
-                        homes = _a.sent();
-                        res.render('index', {
-                            user: req.session.user,
-                            hotels: homes,
-                            successReservation: false,
-                            zoneName: zoneName
-                        });
+                        _b = (_a = res).render;
+                        _c = ['index'];
+                        _d = {
+                            user: req.session.user
+                        };
+                        return [4 /*yield*/, this.homeService.getHomeByZoneIndex(zid)];
+                    case 1:
+                        _b.apply(_a, _c.concat([(_d.hotels = _e.sent(),
+                                _d.successReservation = false,
+                                _d)]));
                         return [2 /*return*/];
                 }
             });
@@ -83,11 +81,9 @@ var zone = /** @class */ (function () {
         __metadata("design:type", Object)
     ], zone.prototype, "zoneRepository", void 0);
     __decorate([
-        AutoWired({
-            class: ConcreteHomeRepository
-        }),
-        __metadata("design:type", Object)
-    ], zone.prototype, "homeRepository", void 0);
+        AutoWired(),
+        __metadata("design:type", HomeService)
+    ], zone.prototype, "homeService", void 0);
     return zone;
 }());
 export default zone;

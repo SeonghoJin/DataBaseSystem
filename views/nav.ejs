@@ -45,8 +45,10 @@
 <script>
     const dropDownBtn = document.querySelector('.dropdown .btn');
     const dropDownitems = document.querySelectorAll('.zone-menu .dropdown-item');
-    const itemNum = location.pathname.split('/')[2];
-    if(itemNum !== undefined){
-        dropDownBtn.innerHTML = dropDownitems[Number(itemNum)-1].innerHTML;
+    const pathnames = location.pathname.split('/');
+    if(pathnames[1] === "zone"){
+        if(pathnames[2] !== undefined){
+            dropDownBtn.innerHTML = dropDownitems[Number(pathnames[2])-1].innerHTML;
+        }
     }
 </script>
