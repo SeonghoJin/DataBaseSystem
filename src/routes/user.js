@@ -1,3 +1,12 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,17 +44,45 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { Router } from "express";
+import { AutoWired } from "jypescript";
+import { ConcreteRoomRepository } from "../repository/RoomRepository.js";
 var user = /** @class */ (function () {
     function user(app) {
         var _this = this;
         this.router = Router();
         app.use('/user', this.router);
-        this.router.get('/:id', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/];
+        this.router.get('/:name', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var name, rooms;
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        name = req.params.name;
+                        if (((_a = req.session.user) === null || _a === void 0 ? void 0 : _a.name) !== name) {
+                            res.redirect('/');
+                            return [2 /*return*/];
+                        }
+                        return [4 /*yield*/, this.roomRepository.getAllData()];
+                    case 1:
+                        rooms = _b.sent();
+                        rooms = rooms.filter(function (room) {
+                            return room.booker === name;
+                        });
+                        res.render("info", {
+                            user: req.session.user,
+                            rooms: rooms
+                        });
+                        return [2 /*return*/];
+                }
             });
         }); });
     }
+    __decorate([
+        AutoWired({
+            class: ConcreteRoomRepository
+        }),
+        __metadata("design:type", Object)
+    ], user.prototype, "roomRepository", void 0);
     return user;
 }());
 export default user;

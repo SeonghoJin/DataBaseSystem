@@ -17,7 +17,6 @@ export class ConcreteRoomRepository implements RoomRepository {
     }
 
     findRoomByHomeIndex(HomeIndex: number): Promise<Room[]> {
-        console.log(HomeIndex);
         return this.database.find({
             hid: HomeIndex
         });

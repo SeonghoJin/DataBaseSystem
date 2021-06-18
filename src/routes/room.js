@@ -102,8 +102,30 @@ var room = /** @class */ (function () {
                 }
             });
         }); });
-        // this.router.delete("/:id", async (req, res) => {
-        // })
+        this.router.delete("/:id", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var id, room;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        id = req.params.id;
+                        return [4 /*yield*/, this.roomRepository.findRoomByIndex(Number(id))];
+                    case 1:
+                        room = _a.sent();
+                        if (room.length === 0) {
+                            res.redirect('/');
+                            return [2 /*return*/];
+                        }
+                        room = room[0];
+                        return [4 /*yield*/, this.roomRepository.update({
+                                rid: room.rid
+                            }, __assign(__assign({}, room), { booker: undefined }))];
+                    case 2:
+                        _a.sent();
+                        res.sendStatus(200);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
     }
     __decorate([
         AutoWired({

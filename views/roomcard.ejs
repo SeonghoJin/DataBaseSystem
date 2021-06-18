@@ -1,5 +1,5 @@
 <li>
-    <div class="card mb-3 shadow p-3 mb-5 bg-body rounded" style="width:1080px">
+    <div class="card mb-3 shadow p-3 mb-5 bg-body rounded" style="width:720px">
         <div class="row g-0">
             <div class="col-md-4">
                 <img src="http://localhost:3000/static/img/house.webp" class="img-fluid rounded" alt="...">
@@ -14,7 +14,12 @@
                         <a href="/room/<%=room.rid%>" 
                             class="btn btn-primary card-btn" >예약
                         </a>
-                    <% }else{ %>
+                    <%}else if(room.booker === user.name){%>
+                        <a id="delete-reservation" 
+                            class="btn btn-primary card-btn" 
+                            onclick="cancleReservation('<%=room.rid%>')">예약 취소
+                        </a>
+                    <%} else{ %>
                         <a href="/room/<%=room.rid%>" 
                             class="btn btn-primary card-btn disabled" >예약불가
                         </a>
@@ -24,5 +29,15 @@
     </div>
 </li>
 <script>
-    console.log("<%=room.isReservation%>");
+    function cancleReservation(e){
+        $.ajax({
+            type:"DELETE",
+            url:`/room/${e}`,
+            success : (data) => {
+                if(data === "OK"){
+                    location.reload();
+                }
+            }
+        })
+    }
 </script>

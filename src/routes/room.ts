@@ -48,9 +48,22 @@ export default class room {
             res.status(200).send();
         });
 
-        // this.router.delete("/:id", async (req, res) => {
-
-        // })
+        this.router.delete("/:id", async (req, res) => {
+            const id = req.params.id;
+            let room: Room[] | Room = await this.roomRepository.findRoomByIndex(Number(id));
+            if (room.length === 0) {
+                res.redirect('/');
+                return;
+            }
+            room = room[0];
+            await this.roomRepository.update({
+                rid: room.rid
+            }, {
+                ...room,
+                booker: undefined
+            })
+            res.sendStatus(200);
+        })
     }
 
 }

@@ -61,7 +61,6 @@ var ConcreteRoomRepository = /** @class */ (function () {
         });
     };
     ConcreteRoomRepository.prototype.findRoomByHomeIndex = function (HomeIndex) {
-        console.log(HomeIndex);
         return this.database.find({
             hid: HomeIndex
         });
