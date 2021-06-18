@@ -35,6 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { Router } from 'express';
+import { ConcreteDangerZoneRepository } from '../repository/DangerZoneRepository.js';
 import { HomeService } from '../service/HomeService.js';
 import Auth from './auth.js';
 import hotel from './hotel.js';
@@ -49,6 +50,7 @@ new room(router);
 new user(router);
 new zone(router);
 var homeService = new HomeService();
+var dangerZoneRepository = new ConcreteDangerZoneRepository();
 router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, _b, _c;
     var _d;
