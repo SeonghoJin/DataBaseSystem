@@ -91,9 +91,22 @@ var comment = /** @class */ (function () {
             var cid;
             var _a;
             return __generator(this, function (_b) {
-                cid = (_a = req.fields) === null || _a === void 0 ? void 0 : _a.cid;
-                res.sendStatus(200);
-                return [2 /*return*/];
+                switch (_b.label) {
+                    case 0:
+                        cid = (_a = req.fields) === null || _a === void 0 ? void 0 : _a.cid;
+                        if (cid === undefined) {
+                            res.sendStatus(400);
+                            return [2 /*return*/];
+                        }
+                        if (Array.isArray(cid)) {
+                            cid = cid.join("");
+                        }
+                        return [4 /*yield*/, this.commentRepository.delete(cid)];
+                    case 1:
+                        _b.sent();
+                        res.sendStatus(200);
+                        return [2 /*return*/];
+                }
             });
         }); });
     }

@@ -20,7 +20,9 @@ export class ConcreteCommentRepository implements CommentRepository {
     }
 
     async delete(cid: string): Promise<void> {
-
+        await this.database.remove({
+            _id: cid
+        })
     }
 
     @Connect(DBconfig)

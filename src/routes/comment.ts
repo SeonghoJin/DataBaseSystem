@@ -40,7 +40,15 @@ export default class comment {
         })
 
         this.router.delete('', async (req, res) => {
-            const cid = req.fields?.cid;
+            let cid = req.fields?.cid;
+            if (cid === undefined) {
+                res.sendStatus(400);
+                return;
+            }
+            if (Array.isArray(cid)) {
+                cid = cid.join("");
+            }
+            await this.commentRepository.delete(cid);
             res.sendStatus(200);
         })
 
