@@ -39,7 +39,7 @@ router.get('/', async (req, res) => {
     res.render('index', {
         user: req.session.user,
         hotels: await homeService.getAllHome(),
-        successReservation: false
+        successReservation: false,
     })
 })
 

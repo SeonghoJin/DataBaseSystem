@@ -5,11 +5,19 @@ import { Home } from "../domain/Home.js";
 export interface HomeRepository extends Repository<Home> {
 
     findHomeByIndex(homeIndex: number): Promise<Home[]>
+    findByZoneIndex(zoneId: number): Promise<Home[]>
     insert(item: Home): Promise<void>
     getAllData(): Promise<any[]>
 }
 
 export class ConcreteHomeRepository implements HomeRepository {
+
+    async findByZoneIndex(zoneId: number): Promise<Home[]> {
+        let data: Home[] = await this.database.find({
+            zoneId: zoneId
+        });
+        return data;
+    }
 
     async getAllData(): Promise<any[]> {
         let allData: any[] = await this.database.getAllData();

@@ -26,7 +26,7 @@
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="true">
                         지역 선택
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <ul class="dropdown-menu zone-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="/zone/1">서울특별시</a></li>
                         <li><a class="dropdown-item" href="/zone/2">부산광역시</a></li>
                         <li><a class="dropdown-item" href="/zone/3">대구광역시</a></li>
@@ -41,3 +41,12 @@
         </div>
     </div>
 </nav>
+
+<script>
+    const dropDownBtn = document.querySelector('.dropdown .btn');
+    const dropDownitems = document.querySelectorAll('.zone-menu .dropdown-item');
+    const itemNum = location.pathname.split('/')[2];
+    if(itemNum !== undefined){
+        dropDownBtn.innerHTML = dropDownitems[Number(itemNum)-1].innerHTML;
+    }
+</script>
