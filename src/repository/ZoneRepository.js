@@ -44,10 +44,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { Connect } from "jypescript";
-import { DBconfig } from "../config";
+import { DBconfig } from "../config/index.js";
 var ConcreteZoneRepository = /** @class */ (function () {
     function ConcreteZoneRepository() {
     }
+    ConcreteZoneRepository.prototype.insert = function (zone) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.database.insert(zone)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     ConcreteZoneRepository.prototype.findById = function (zid) {
         return __awaiter(this, void 0, void 0, function () {
             var item;
@@ -88,3 +100,4 @@ var ConcreteZoneRepository = /** @class */ (function () {
     ], ConcreteZoneRepository.prototype, "database", void 0);
     return ConcreteZoneRepository;
 }());
+export { ConcreteZoneRepository };

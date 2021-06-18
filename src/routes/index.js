@@ -41,11 +41,13 @@ import hotel from './hotel.js';
 import room from './room.js';
 import { SessionUser } from './SessionUser.js';
 import user from './user.js';
+import zone from './zone.js';
 var router = Router();
 new Auth(router);
 new hotel(router);
 new room(router);
 new user(router);
+new zone(router);
 var homeService = new HomeService();
 router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, _b, _c;

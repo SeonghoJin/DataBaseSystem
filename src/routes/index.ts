@@ -5,13 +5,14 @@ import hotel from './hotel.js';
 import room from './room.js';
 import { SessionUser } from './SessionUser.js';
 import user from './user.js';
+import zone from './zone.js';
 
 const router = Router();
 new Auth(router);
 new hotel(router);
 new room(router);
 new user(router);
-
+new zone(router);
 const homeService: HomeService = new HomeService();
 
 declare module 'express-session' {

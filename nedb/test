@@ -1,14 +1,22 @@
 {"id":"이성호","password":"123","_id":"1zVosnWZs4K62pbe"}
 {"hid":1,"rid":11,"description":"1번째의 1번째","price":45000,"_id":"7zNUsVviRQWCCgl123"}
 {"hid":4,"rid":4,"description":"4번째의 4번째","price":45000,"_id":"7zNUsVviRQWCCglz"}
+{"zid":5,"name":"광주광역시","_id":"HUd7t9i3YB8Radla"}
+{"zid":3,"name":"대구광역시","_id":"HqK6f923abnRHKVE"}
 {"homeIndex":3,"description":"매우 좋습니당","roomCount":1,"title":"세번째 집","_id":"JRLpH8fXQ2AgQObI"}
+{"zid":1,"name":"서울특별시","_id":"RFrAtX3Bvfr5CNMZ"}
 {"hid":5,"rid":6,"description":"5번째의 6번째","price":1200,"isReservation":false,"_id":"THDVBzh6Q4YBa7hQ"}
+{"zid":2,"name":"부산광역시","_id":"VpepnlNh3PZ6dx2D"}
+{"zid":6,"name":"대전광역시","_id":"XZfyJXqU4IIk1mNE"}
 {"homeIndex":2,"description":"매우 좋습니당","roomCount":2,"title":"두번째 집","_id":"bzRBa1KHX9Rudl6h"}
+{"zid":8,"name":"세종특별자치시","_id":"c9P5p4ujMbeHOqwz"}
 {"homeIndex":1,"description":"매우 좋습니당","roomCount":1,"title":"첫번째 집","_id":"cM9DMYwKx4nEo5uP"}
 {"id":"123","password":"213","_id":"fqqf5TCDK0CLyQ66"}
+{"zid":7,"name":"울산광역시","_id":"m4N2Hy3AMjtTK41U"}
 {"homeIndex":5,"description":"좋습니당","roomCount":3,"title":"다섯번째 집","_id":"oUuPFVYcxZRoz13K"}
 {"homeIndex":4,"description":"매우 좋습니당","roomCount":2,"title":"네번째 집","_id":"q82HonEdQI6Eqd8Z"}
 {"id":"진성호","password":"213","_id":"qoKOwUKujnAjINTq"}
+{"zid":4,"name":"인천광역시","_id":"vR79ko0lDF9KoTUH"}
 {"hid":5,"rid":7,"description":"5번째의 7번째","price":500123,"_id":"yR3KjmxinXMi2G4i"}
 {"hid":4,"rid":5,"description":"4번째의 5번째","price":35000,"_id":"zUlGO73bdMOXlojL"}
 {"hid":1,"rid":12,"description":"1번째의 2번째","price":35000,"_id":"zUlGO73bdMOXlojLa"}

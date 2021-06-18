@@ -1,13 +1,18 @@
 import { Connect, IDatabase, Repository } from "jypescript";
-import { DBconfig } from "../config";
+import { DBconfig } from "../config/index.js";
 import { Zone } from "../domain/Zone";
 
-interface ZoneRepository extends Repository<Zone> {
+export interface ZoneRepository extends Repository<Zone> {
     findById(zid: number): Promise<Zone>;
-    findAll(): Promise<Zone[]>
+    findAll(): Promise<Zone[]>;
+    insert(zone: Zone): Promise<void>;
 }
 
-class ConcreteZoneRepository implements ZoneRepository {
+export class ConcreteZoneRepository implements ZoneRepository {
+
+    async insert(zone: Zone): Promise<void> {
+        await this.database.insert(zone);
+    }
 
     async findById(zid: number): Promise<Zone> {
         const item = await this.database.find({
