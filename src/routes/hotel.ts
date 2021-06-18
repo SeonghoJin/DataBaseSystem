@@ -4,6 +4,7 @@ import { Home } from "../domain/Home";
 import { Room } from "../domain/Room";
 import { ConcreteHomeRepository, HomeRepository } from "../repository/HomeRepository.js";
 import { ConcreteRoomRepository, RoomRepository } from "../repository/RoomRepository.js";
+import { HomeService } from "../service/HomeService.js";
 
 export default class hotel {
     router: Router = Router();
@@ -18,12 +19,14 @@ export default class hotel {
     })
     roomRepository: RoomRepository
 
+    @AutoWired()
+    homeService: HomeService;
+
     constructor(app: Router) {
         app.use('/hotel', this.router);
 
         this.router.get('/:id', async (req, res) => {
-            await this.roomRepository.getAllData()
-            let home: Home[] | Home = (await this.homeRepository.findHomeByIndex(Number(req.params.id)))
+            let home: Home[] | Home = (await this.homeService.findByIndex(req.params.id));
             if (home.length === 0) {
                 res.redirect('/');
                 return;
@@ -32,7 +35,8 @@ export default class hotel {
             const rooms: Room[] = (await this.roomRepository.findRoomByHomeIndex(home.homeIndex));
             res.render('hotel', {
                 user: req.session.user,
-                rooms: rooms
+                rooms: rooms,
+                home: home
             });
         })
 

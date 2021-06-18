@@ -16,13 +16,15 @@
     </ul>
     <div class="comment-container shadow p-3 mb-5 bg-body rounded" style="width: 720px;">
         <div class="comment-contents">
-            <div class="card">
-                <h5 class="card-header">Featured</h5>
-                <div class="card-body">
-                    <p class="card-text">With supporting texsdsadsadsadasdsadasdsaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddt below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-danger">삭제</a>
+            <% for(let i = 0; i < home.comments.length; i++){%>
+                <div class="card comment-card">
+                    <h5 class="card-header"><%=home.comments[i].uid%></h5>
+                    <div class="card-body">
+                        <p class="card-text"><%=home.comments[i].value%></p>
+                        <button onclick="deleteComment(this)" id=<%=home.comments[i]._id%> class="btn btn-danger">삭제</a>
+                    </div>
                 </div>
-            </div>
+            <%}%>
         </div>
         <div class="comment-input-container">
             <input class="comment-input form-control">
@@ -51,6 +53,10 @@
         }).fail(()=>{
             location.replace("/login");
         })
+    }
+
+    function deleteComment(target){
+        console.log(target.id);
     }
 </script>
 

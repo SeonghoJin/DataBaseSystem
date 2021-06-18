@@ -3,16 +3,16 @@ import { DBconfig } from "../config/index.js";
 import { Comment } from "../domain/Comment";
 
 export interface CommentRepository extends Repository<Comment> {
-    findByUid(uid: string): Promise<Comment[]>;
+    findByhid(hcid: string): Promise<Comment[]>;
     insert(comment: Comment): Promise<void>;
     delete(cid: string): Promise<void>;
 }
 
 export class ConcreteCommentRepository implements CommentRepository {
 
-    async findByUid(uid: string): Promise<Comment[]> {
+    async findByhid(hid: string): Promise<Comment[]> {
         return await this.database.find({
-            uid: uid,
+            hcid: hid
         })
     }
     async insert(comment: Comment): Promise<void> {

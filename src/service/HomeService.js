@@ -55,6 +55,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { AutoWired } from 'jypescript';
+import { ConcreteCommentRepository } from '../repository/CommentRepository.js';
 import { ConcreteDangerZoneRepository } from '../repository/DangerZoneRepository.js';
 import { ConcreteHomeRepository } from '../repository/HomeRepository.js';
 var HomeService = /** @class */ (function () {
@@ -67,7 +68,7 @@ var HomeService = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.homeRepository.getAllData()];
                     case 1:
                         homes = _a.sent();
-                        return [4 /*yield*/, this.addDanagerZoneProperty(homes)];
+                        return [4 /*yield*/, this.addProperty(homes)];
                     case 2: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -79,8 +80,33 @@ var HomeService = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.homeRepository.findByZoneIndex(Number(zid))];
                     case 1:
                         homes = _a.sent();
-                        return [4 /*yield*/, this.addDanagerZoneProperty(homes)];
+                        return [4 /*yield*/, this.addProperty(homes)];
                     case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.findByIndex = function (hid) { return __awaiter(_this, void 0, void 0, function () {
+            var homes;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.homeRepository.findHomeByIndex(Number(hid))];
+                    case 1:
+                        homes = _a.sent();
+                        return [4 /*yield*/, this.addProperty(homes)];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.addProperty = function (homes) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.addDanagerZoneProperty(homes)];
+                    case 1:
+                        homes = _a.sent();
+                        return [4 /*yield*/, this.addCommentProperty(homes)];
+                    case 2:
+                        homes = _a.sent();
+                        return [2 /*return*/, homes];
                 }
             });
         }); };
@@ -102,6 +128,29 @@ var HomeService = /** @class */ (function () {
                 }
             });
         }); };
+        this.addCommentProperty = function (homes) { return __awaiter(_this, void 0, void 0, function () {
+            var i, comments;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        i = 0;
+                        _a.label = 1;
+                    case 1:
+                        if (!(i < homes.length)) return [3 /*break*/, 4];
+                        return [4 /*yield*/, this.
+                                commentRepository.
+                                findByhid(homes[i].homeIndex.toString())];
+                    case 2:
+                        comments = _a.sent();
+                        homes[i] = __assign(__assign({}, homes[i]), { comments: comments });
+                        _a.label = 3;
+                    case 3:
+                        i++;
+                        return [3 /*break*/, 1];
+                    case 4: return [2 /*return*/, homes];
+                }
+            });
+        }); };
     }
     __decorate([
         AutoWired({
@@ -115,6 +164,12 @@ var HomeService = /** @class */ (function () {
         }),
         __metadata("design:type", ConcreteDangerZoneRepository)
     ], HomeService.prototype, "dangerZoneRepository", void 0);
+    __decorate([
+        AutoWired({
+            class: ConcreteCommentRepository
+        }),
+        __metadata("design:type", Object)
+    ], HomeService.prototype, "commentRepository", void 0);
     return HomeService;
 }());
 export { HomeService };

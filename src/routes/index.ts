@@ -39,7 +39,6 @@ router.get('/', async (req, res) => {
     });
 
     req.session.save();
-
     res.render('index', {
         user: req.session.user,
         hotels: await homeService.getAllHome(),

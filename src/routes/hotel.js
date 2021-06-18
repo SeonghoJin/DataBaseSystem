@@ -47,6 +47,7 @@ import { Router } from "express";
 import { AutoWired } from "jypescript";
 import { ConcreteHomeRepository } from "../repository/HomeRepository.js";
 import { ConcreteRoomRepository } from "../repository/RoomRepository.js";
+import { HomeService } from "../service/HomeService.js";
 var hotel = /** @class */ (function () {
     function hotel(app) {
         var _this = this;
@@ -56,11 +57,8 @@ var hotel = /** @class */ (function () {
             var home, rooms;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.roomRepository.getAllData()];
+                    case 0: return [4 /*yield*/, this.homeService.findByIndex(req.params.id)];
                     case 1:
-                        _a.sent();
-                        return [4 /*yield*/, this.homeRepository.findHomeByIndex(Number(req.params.id))];
-                    case 2:
                         home = (_a.sent());
                         if (home.length === 0) {
                             res.redirect('/');
@@ -68,11 +66,12 @@ var hotel = /** @class */ (function () {
                         }
                         home = home[0];
                         return [4 /*yield*/, this.roomRepository.findRoomByHomeIndex(home.homeIndex)];
-                    case 3:
+                    case 2:
                         rooms = (_a.sent());
                         res.render('hotel', {
                             user: req.session.user,
-                            rooms: rooms
+                            rooms: rooms,
+                            home: home
                         });
                         return [2 /*return*/];
                 }
@@ -91,6 +90,10 @@ var hotel = /** @class */ (function () {
         }),
         __metadata("design:type", Object)
     ], hotel.prototype, "roomRepository", void 0);
+    __decorate([
+        AutoWired(),
+        __metadata("design:type", HomeService)
+    ], hotel.prototype, "homeService", void 0);
     return hotel;
 }());
 export default hotel;
