@@ -1,11 +1,9 @@
 {"dangerZoneId":3,"_id":"4Utl6YgWCGeihWmq"}
 {"uid":"진성호","_id":"4XeBrOdtNdg7kOBR"}
-{"id":"asd","password":"123","_id":"BaQEceF0L2eDyGnY"}
 {"hid":1123123,"rid":3123,"description":"2312312","price":1231231,"booker":"admin","_id":"GvCWUCGbXLfqmdpb"}
 {"zid":5,"name":"광주광역시","_id":"HUd7t9i3YB8Radla"}
 {"zid":3,"name":"대구광역시","_id":"HqK6f923abnRHKVE"}
 {"uid":"진성호","_id":"IVFsBLCDTK4Zr2CF"}
-{"id":"진성호","password":"213","_id":"PQVwimuFpHg856qR"}
 {"zid":1,"name":"서울특별시","_id":"RFrAtX3Bvfr5CNMZ"}
 {"title":"12312","description":"12312312","homeIndex":1123123,"zoneId":1,"_id":"RMgojHDljGsF7y2A"}
 {"zid":2,"name":"부산광역시","_id":"VpepnlNh3PZ6dx2D"}
@@ -17,5 +15,3 @@
 {"uid":"진성호","_id":"ozBYQ2u4uGuYZvAL"}
 {"zid":4,"name":"인천광역시","_id":"vR79ko0lDF9KoTUH"}
 {"id":"admin","password":"admin","_id":"xVBpdH7bgsUK75AW"}
-{"$$deleted":true,"_id":"PQVwimuFpHg856qR"}
-{"$$deleted":true,"_id":"BaQEceF0L2eDyGnY"}
