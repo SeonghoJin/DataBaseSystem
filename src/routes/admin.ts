@@ -5,11 +5,14 @@ import { DangerZone } from "../domain/DangerZone.js";
 import { Home } from "../domain/Home.js";
 import { Room } from "../domain/Room.js";
 import { CommentRepository, ConcreteCommentRepository } from "../repository/CommentRepository.js";
-import { ConcreteDangerZoneRepository, DangerZoneRepository } from "../repository/DangerZoneRepository.js";
+import {
+    ConcreteMySQLDangerZoneRepository,
+    DangerZoneRepository
+} from "../repository/DangerZoneRepository.js";
 import { ConcreteHomeRepository, HomeRepository } from "../repository/HomeRepository.js";
 import { ConcreteRoomRepository, RoomRepository } from "../repository/RoomRepository.js";
 import {ConcreteMySQLUserRepository, ConcreteUserRepository, UserRepository} from "../repository/UserRepository.js";
-import { ConcreteZoneRepository, ZoneRepository } from "../repository/ZoneRepository.js";
+import {ConcreteMySQLZoneRepository, ConcreteZoneRepository, ZoneRepository} from "../repository/ZoneRepository.js";
 
 export class admin {
 
@@ -21,12 +24,12 @@ export class admin {
     commentRepository: CommentRepository
 
     @AutoWired({
-        class: ConcreteZoneRepository
+        class: ConcreteMySQLZoneRepository
     })
     zoneRepository: ZoneRepository
 
     @AutoWired({
-        class: ConcreteDangerZoneRepository
+        class: ConcreteMySQLDangerZoneRepository
     })
     dangerZoneRepository: DangerZoneRepository
 
@@ -73,7 +76,6 @@ export class admin {
                     zoneName
                 }
             });
-
             res.render("admin", {
                 user: req.session.user,
                 users: users,
@@ -88,24 +90,19 @@ export class admin {
             const id = req.fields?.id;
             const type = req.fields?.type;
             if (type === "comment") {
-                res.sendStatus(200);
                 await this.commentRepository.delete(id?.toString());
             } else if (type === "user") {
-                res.sendStatus(200);
-                console.log(type);
                 await this.userRepository.delete(id?.toString());
             } else if (type === "dangerZone") {
-                res.sendStatus(200);
                 await this.dangerZoneRepository.delete(Number(id?.toString()));
             } else if (type === "home") {
-                res.sendStatus(200);
                 await this.homeRepository.delete(Number(id));
             } else if (type === "room") {
-                res.sendStatus(200);
                 await this.roomRepository.delete(Number(id));
             } else {
                 res.sendStatus(400);
             }
+            res.sendStatus(200);
         })
 
         this.router.post("/dangerzone", async (req, res) => {

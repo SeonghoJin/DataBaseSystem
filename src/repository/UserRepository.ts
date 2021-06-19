@@ -61,6 +61,7 @@ export class ConcreteMySQLUserRepository implements UserRepository{
             this.databasePool.query(`delete from user where id = "${id}"`,
                 (err, rows, field) => {
                 console.log("user-delete", err);
+                res();
                 })
         })
     }
@@ -106,6 +107,7 @@ export class ConcreteMySQLUserRepository implements UserRepository{
             this.databasePool.query(`insert into user (id, password) values ("${user.id}", "${user.password}")`,
                 (err, rows, field) => {
                     console.log("user-insert", err);
+                    res();
                 });
         })
     }

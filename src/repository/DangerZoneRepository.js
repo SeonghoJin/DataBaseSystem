@@ -45,6 +45,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { Connect } from "jypescript";
 import { DBconfig } from "../config/index.js";
+import { DangerZone } from "../domain/DangerZone.js";
+import mysql from "mysql2";
 var ConcreteDangerZoneRepository = /** @class */ (function () {
     function ConcreteDangerZoneRepository() {
     }
@@ -107,3 +109,81 @@ var ConcreteDangerZoneRepository = /** @class */ (function () {
     return ConcreteDangerZoneRepository;
 }());
 export { ConcreteDangerZoneRepository };
+var ConcreteMySQLDangerZoneRepository = /** @class */ (function () {
+    function ConcreteMySQLDangerZoneRepository() {
+        this.databasePool = mysql.createPool({
+            host: DBconfig.host,
+            user: DBconfig.user,
+            database: DBconfig.name,
+            password: DBconfig.password,
+            waitForConnections: true,
+            connectionLimit: 10,
+            queueLimit: 0
+        });
+    }
+    ConcreteMySQLDangerZoneRepository.prototype.delete = function (dangerZoneId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("delete from dangerzone where dzid = " + dangerZoneId, function (err, rows, field) {
+                            console.log("delete-dangerzone", err);
+                            res();
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLDangerZoneRepository.prototype.findAll = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from dangerzone", function (err, rows, field) {
+                            console.log("findAll-dangerzone", err);
+                            res(_this.toDangerZoneArray((rows)));
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLDangerZoneRepository.prototype.findById = function (dangerZoneId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from dangerzone where dzid = " + dangerZoneId, function (err, rows, field) {
+                            console.log("findbyId-dangerzone", err);
+                            res(_this.toDangerZoneArray(rows));
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLDangerZoneRepository.prototype.insert = function (dangerZone) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("insert into dangerzone (dzid) values (" + dangerZone.dangerZoneId + ")", function (err, rows, field) {
+                            console.log("insert-dangerzone", err);
+                            res();
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLDangerZoneRepository.prototype.toDangerZone = function (row) {
+        return new DangerZone({
+            dangerZoneId: row.dzid
+        });
+    };
+    ConcreteMySQLDangerZoneRepository.prototype.toDangerZoneArray = function (rows) {
+        var _this = this;
+        return rows.map(function (row) {
+            return _this.toDangerZone(row);
+        });
+    };
+    return ConcreteMySQLDangerZoneRepository;
+}());
+export { ConcreteMySQLDangerZoneRepository };

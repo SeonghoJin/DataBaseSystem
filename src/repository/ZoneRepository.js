@@ -45,6 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { Connect } from "jypescript";
 import { DBconfig } from "../config/index.js";
+import mysql from "mysql2";
 var ConcreteZoneRepository = /** @class */ (function () {
     function ConcreteZoneRepository() {
     }
@@ -100,3 +101,44 @@ var ConcreteZoneRepository = /** @class */ (function () {
     return ConcreteZoneRepository;
 }());
 export { ConcreteZoneRepository };
+var ConcreteMySQLZoneRepository = /** @class */ (function () {
+    function ConcreteMySQLZoneRepository() {
+        this.databasePool = mysql.createPool({
+            host: DBconfig.host,
+            user: DBconfig.user,
+            database: DBconfig.name,
+            password: DBconfig.password,
+            waitForConnections: true,
+            connectionLimit: 10,
+            queueLimit: 0
+        });
+    }
+    ConcreteMySQLZoneRepository.prototype.findAll = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from zone", function (err, rows, field) {
+                            console.log("findByAll-zone", err);
+                            res(rows);
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLZoneRepository.prototype.findById = function (zid) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from zone where zid=" + zid, function (err, rows, field) {
+                            console.log("findById-zone", err);
+                            res(rows[0]);
+                        });
+                    })];
+            });
+        });
+    };
+    return ConcreteMySQLZoneRepository;
+}());
+export { ConcreteMySQLZoneRepository };

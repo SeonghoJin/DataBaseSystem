@@ -1,16 +1,11 @@
 import { Router } from "express";
 import { AutoWired } from "jypescript";
 import { ConcreteHomeRepository, HomeRepository } from "../repository/HomeRepository.js";
-import { ConcreteZoneRepository, ZoneRepository } from "../repository/ZoneRepository.js";
+import {ConcreteMySQLZoneRepository, ConcreteZoneRepository, ZoneRepository} from "../repository/ZoneRepository.js";
 import { HomeService } from "../service/HomeService.js";
 
 export default class zone {
     router: Router = Router();
-
-    @AutoWired({
-        class: ConcreteZoneRepository
-    })
-    zoneRepository: ZoneRepository;
 
     @AutoWired()
     homeService: HomeService;

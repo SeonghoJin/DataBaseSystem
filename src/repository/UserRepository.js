@@ -124,6 +124,7 @@ var ConcreteMySQLUserRepository = /** @class */ (function () {
                 return [2 /*return*/, new Promise(function (res, rej) {
                         _this.databasePool.query("delete from user where id = \"" + id + "\"", function (err, rows, field) {
                             console.log("user-delete", err);
+                            res();
                         });
                     })];
             });
@@ -181,6 +182,7 @@ var ConcreteMySQLUserRepository = /** @class */ (function () {
                 return [2 /*return*/, new Promise(function (res, rej) {
                         _this.databasePool.query("insert into user (id, password) values (\"" + user.id + "\", \"" + user.password + "\")", function (err, rows, field) {
                             console.log("user-insert", err);
+                            res();
                         });
                     })];
             });

@@ -61,11 +61,11 @@ import { DangerZone } from "../domain/DangerZone.js";
 import { Home } from "../domain/Home.js";
 import { Room } from "../domain/Room.js";
 import { ConcreteCommentRepository } from "../repository/CommentRepository.js";
-import { ConcreteDangerZoneRepository } from "../repository/DangerZoneRepository.js";
+import { ConcreteMySQLDangerZoneRepository } from "../repository/DangerZoneRepository.js";
 import { ConcreteHomeRepository } from "../repository/HomeRepository.js";
 import { ConcreteRoomRepository } from "../repository/RoomRepository.js";
 import { ConcreteMySQLUserRepository } from "../repository/UserRepository.js";
-import { ConcreteZoneRepository } from "../repository/ZoneRepository.js";
+import { ConcreteMySQLZoneRepository } from "../repository/ZoneRepository.js";
 var admin = /** @class */ (function () {
     function admin(app) {
         var _this = this;
@@ -128,36 +128,30 @@ var admin = /** @class */ (function () {
                         id = (_a = req.fields) === null || _a === void 0 ? void 0 : _a.id;
                         type = (_b = req.fields) === null || _b === void 0 ? void 0 : _b.type;
                         if (!(type === "comment")) return [3 /*break*/, 2];
-                        res.sendStatus(200);
                         return [4 /*yield*/, this.commentRepository.delete(id === null || id === void 0 ? void 0 : id.toString())];
                     case 1:
                         _c.sent();
                         return [3 /*break*/, 11];
                     case 2:
                         if (!(type === "user")) return [3 /*break*/, 4];
-                        res.sendStatus(200);
-                        console.log(type);
                         return [4 /*yield*/, this.userRepository.delete(id === null || id === void 0 ? void 0 : id.toString())];
                     case 3:
                         _c.sent();
                         return [3 /*break*/, 11];
                     case 4:
                         if (!(type === "dangerZone")) return [3 /*break*/, 6];
-                        res.sendStatus(200);
                         return [4 /*yield*/, this.dangerZoneRepository.delete(Number(id === null || id === void 0 ? void 0 : id.toString()))];
                     case 5:
                         _c.sent();
                         return [3 /*break*/, 11];
                     case 6:
                         if (!(type === "home")) return [3 /*break*/, 8];
-                        res.sendStatus(200);
                         return [4 /*yield*/, this.homeRepository.delete(Number(id))];
                     case 7:
                         _c.sent();
                         return [3 /*break*/, 11];
                     case 8:
                         if (!(type === "room")) return [3 /*break*/, 10];
-                        res.sendStatus(200);
                         return [4 /*yield*/, this.roomRepository.delete(Number(id))];
                     case 9:
                         _c.sent();
@@ -165,7 +159,9 @@ var admin = /** @class */ (function () {
                     case 10:
                         res.sendStatus(400);
                         _c.label = 11;
-                    case 11: return [2 /*return*/];
+                    case 11:
+                        res.sendStatus(200);
+                        return [2 /*return*/];
                 }
             });
         }); });
@@ -261,13 +257,13 @@ var admin = /** @class */ (function () {
     ], admin.prototype, "commentRepository", void 0);
     __decorate([
         AutoWired({
-            class: ConcreteZoneRepository
+            class: ConcreteMySQLZoneRepository
         }),
         __metadata("design:type", Object)
     ], admin.prototype, "zoneRepository", void 0);
     __decorate([
         AutoWired({
-            class: ConcreteDangerZoneRepository
+            class: ConcreteMySQLDangerZoneRepository
         }),
         __metadata("design:type", Object)
     ], admin.prototype, "dangerZoneRepository", void 0);

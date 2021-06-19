@@ -56,7 +56,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { AutoWired } from 'jypescript';
 import { ConcreteCommentRepository } from '../repository/CommentRepository.js';
-import { ConcreteDangerZoneRepository } from '../repository/DangerZoneRepository.js';
+import { ConcreteMySQLDangerZoneRepository } from '../repository/DangerZoneRepository.js';
 import { ConcreteHomeRepository } from '../repository/HomeRepository.js';
 var HomeService = /** @class */ (function () {
     function HomeService() {
@@ -160,9 +160,9 @@ var HomeService = /** @class */ (function () {
     ], HomeService.prototype, "homeRepository", void 0);
     __decorate([
         AutoWired({
-            class: ConcreteDangerZoneRepository
+            class: ConcreteMySQLDangerZoneRepository
         }),
-        __metadata("design:type", ConcreteDangerZoneRepository)
+        __metadata("design:type", Object)
     ], HomeService.prototype, "dangerZoneRepository", void 0);
     __decorate([
         AutoWired({

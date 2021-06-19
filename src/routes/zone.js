@@ -45,7 +45,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { Router } from "express";
 import { AutoWired } from "jypescript";
-import { ConcreteZoneRepository } from "../repository/ZoneRepository.js";
 import { HomeService } from "../service/HomeService.js";
 var zone = /** @class */ (function () {
     function zone(app) {
@@ -74,12 +73,6 @@ var zone = /** @class */ (function () {
             });
         }); });
     }
-    __decorate([
-        AutoWired({
-            class: ConcreteZoneRepository
-        }),
-        __metadata("design:type", Object)
-    ], zone.prototype, "zoneRepository", void 0);
     __decorate([
         AutoWired(),
         __metadata("design:type", HomeService)
