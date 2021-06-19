@@ -1,10 +1,10 @@
 import { AutoWired } from 'jypescript';
 import { User } from '../domain/User.js';
-import { ConcreteUserRepository, UserRepository } from '../repository/UserRepository.js';
+import {ConcreteMySQLUserRepository, ConcreteUserRepository, UserRepository} from '../repository/UserRepository.js';
 
 export class AuthService {
 
-    @AutoWired({ class: ConcreteUserRepository })
+    @AutoWired({ class: ConcreteMySQLUserRepository })
     userRepository: UserRepository;
 
     public async login(name: string | string[], password: string | string[]) {
@@ -26,6 +26,7 @@ export class AuthService {
         }
 
         const id = await this.userRepository.getUserById(name);
+        console.log("current", id);
         if (id.length !== 0) return false;
 
         this.userRepository.insert(new User(name, password));

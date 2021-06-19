@@ -1,7 +1,7 @@
 import { Repository, Bean, Connect, IDatabase } from "jypescript";
 import { DBconfig } from "../config/index.js";
 import { User } from "../domain/User.js";
-
+import mysql, {RowDataPacket} from 'mysql2'
 
 export interface UserRepository extends Repository<User> {
 
@@ -43,3 +43,70 @@ export class ConcreteUserRepository implements UserRepository {
     }
 }
 
+export class ConcreteMySQLUserRepository implements UserRepository{
+
+    database: IDatabase;
+    databasePool = mysql.createPool({
+        host: DBconfig.host,
+        user: DBconfig.user,
+        database : DBconfig.name,
+        password : DBconfig.password,
+        waitForConnections : true,
+        connectionLimit : 10,
+        queueLimit : 0
+    });
+
+    async delete(id: string | undefined): Promise<void> {
+        return new Promise((res, rej) => {
+            this.databasePool.query(`delete from user where id = "${id}"`,
+                (err, rows, field) => {
+                console.log("user-delete", err);
+                })
+        })
+    }
+
+    async exist(id: string, password: string): Promise<boolean> {
+        return new Promise<boolean>((res, rej) => {
+             this.databasePool.query(`select * from user where id="${id}" and password="${password}"`,
+                (err, rows, field) => {
+                    console.log("user-exist", err);
+                    if(Array.isArray(rows)){
+                        res(rows.length !== 0)
+                    }
+                    else {
+                        res(false);
+                    }
+                })
+        });
+    }
+
+    async findAll(): Promise<any> {
+        return new Promise<any>((res, rej) => {
+            this.databasePool.query(`select * from user`,
+                (err, rows, field) => {
+                    console.log("user-findAll",err);
+                    res(rows);
+                })
+        })
+    }
+
+    async getUserById(id: string): Promise<User[]> {
+        return new Promise<User[]>((res, rej) => {
+            this.databasePool.query(`select * from user where id = "${id}"`,
+                (err, rows, field) => {
+                    console.log("user-getUserById", err);
+                    console.log(rows);
+                    res(rows as User[]);
+                })
+        })
+    }
+
+    async insert(user: User): Promise<void> {
+        return new Promise<void>((res, rej) => {
+            this.databasePool.query(`insert into user (id, password) values ("${user.id}", "${user.password}")`,
+                (err, rows, field) => {
+                    console.log("user-insert", err);
+                });
+        })
+    }
+}

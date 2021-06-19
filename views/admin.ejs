@@ -353,6 +353,7 @@
     }
 
     function deleteUser(target){
+        console.log(2);
         $.ajax({
             url : "/admin/id",
             type : "DELETE",
@@ -361,6 +362,7 @@
                 type : "user"
             },
             success : (data) => {
+                console.log(data);
                 if(data === "OK"){
                     location.reload();
                 }

@@ -109,6 +109,7 @@ var AuthRouter = /** @class */ (function () {
                         }
                         else {
                             console.log("회원가입 실패");
+                            res.redirect('/');
                         }
                         _d.label = 4;
                     case 4: return [2 /*return*/];

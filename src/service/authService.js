@@ -45,7 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { AutoWired } from 'jypescript';
 import { User } from '../domain/User.js';
-import { ConcreteUserRepository } from '../repository/UserRepository.js';
+import { ConcreteMySQLUserRepository } from '../repository/UserRepository.js';
 var AuthService = /** @class */ (function () {
     function AuthService() {
     }
@@ -81,6 +81,7 @@ var AuthService = /** @class */ (function () {
                         return [4 /*yield*/, this.userRepository.getUserById(name)];
                     case 1:
                         id = _a.sent();
+                        console.log("current", id);
                         if (id.length !== 0)
                             return [2 /*return*/, false];
                         this.userRepository.insert(new User(name, password));
@@ -94,7 +95,7 @@ var AuthService = /** @class */ (function () {
         return spEmail.length == 2 && spEmail[1] != '';
     };
     __decorate([
-        AutoWired({ class: ConcreteUserRepository }),
+        AutoWired({ class: ConcreteMySQLUserRepository }),
         __metadata("design:type", Object)
     ], AuthService.prototype, "userRepository", void 0);
     return AuthService;

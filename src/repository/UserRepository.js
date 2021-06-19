@@ -45,6 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { Connect } from "jypescript";
 import { DBconfig } from "../config/index.js";
+import mysql from 'mysql2';
 var ConcreteUserRepository = /** @class */ (function () {
     function ConcreteUserRepository() {
     }
@@ -104,3 +105,87 @@ var ConcreteUserRepository = /** @class */ (function () {
     return ConcreteUserRepository;
 }());
 export { ConcreteUserRepository };
+var ConcreteMySQLUserRepository = /** @class */ (function () {
+    function ConcreteMySQLUserRepository() {
+        this.databasePool = mysql.createPool({
+            host: DBconfig.host,
+            user: DBconfig.user,
+            database: DBconfig.name,
+            password: DBconfig.password,
+            waitForConnections: true,
+            connectionLimit: 10,
+            queueLimit: 0
+        });
+    }
+    ConcreteMySQLUserRepository.prototype.delete = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("delete from user where id = \"" + id + "\"", function (err, rows, field) {
+                            console.log("user-delete", err);
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLUserRepository.prototype.exist = function (id, password) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from user where id=\"" + id + "\" and password=\"" + password + "\"", function (err, rows, field) {
+                            console.log("user-exist", err);
+                            if (Array.isArray(rows)) {
+                                res(rows.length !== 0);
+                            }
+                            else {
+                                res(false);
+                            }
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLUserRepository.prototype.findAll = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from user", function (err, rows, field) {
+                            console.log("user-findAll", err);
+                            res(rows);
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLUserRepository.prototype.getUserById = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from user where id = \"" + id + "\"", function (err, rows, field) {
+                            console.log("user-getUserById", err);
+                            console.log(rows);
+                            res(rows);
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLUserRepository.prototype.insert = function (user) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("insert into user (id, password) values (\"" + user.id + "\", \"" + user.password + "\")", function (err, rows, field) {
+                            console.log("user-insert", err);
+                        });
+                    })];
+            });
+        });
+    };
+    return ConcreteMySQLUserRepository;
+}());
+export { ConcreteMySQLUserRepository };

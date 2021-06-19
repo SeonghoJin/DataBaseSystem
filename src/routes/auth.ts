@@ -73,6 +73,7 @@ export default class AuthRouter {
                     res.redirect('/');
                 } else {
                     console.log("회원가입 실패");
+                    res.redirect('/');
                 }
             }
         })
