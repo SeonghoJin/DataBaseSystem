@@ -2,7 +2,7 @@ import { Router } from "express";
 import { AutoWired } from "jypescript";
 import { Home } from "../domain/Home";
 import { Room } from "../domain/Room";
-import { ConcreteHomeRepository, HomeRepository } from "../repository/HomeRepository.js";
+import {ConcreteHomeRepository, ConcreteMySQLHomeRepository, HomeRepository} from "../repository/HomeRepository.js";
 import { ConcreteRoomRepository, RoomRepository } from "../repository/RoomRepository.js";
 import { HomeService } from "../service/HomeService.js";
 
@@ -10,7 +10,7 @@ export default class hotel {
     router: Router = Router();
 
     @AutoWired({
-        class: ConcreteHomeRepository
+        class: ConcreteMySQLHomeRepository
     })
     homeRepository: HomeRepository;
 

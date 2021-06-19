@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { AutoWired } from "jypescript";
 import { Room } from "../domain/Room";
-import { ConcreteHomeRepository, HomeRepository } from "../repository/HomeRepository.js";
+import {ConcreteHomeRepository, ConcreteMySQLHomeRepository, HomeRepository} from "../repository/HomeRepository.js";
 import { ConcreteRoomRepository, RoomRepository } from "../repository/RoomRepository.js";
 
 export default class room {
 
     router = Router();
     @AutoWired({
-        class: ConcreteHomeRepository
+        class: ConcreteMySQLHomeRepository
     })
     homeRepository: HomeRepository;
 

@@ -45,6 +45,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { Connect } from "jypescript";
 import { DBconfig } from "../config/index.js";
+import { Home } from "../domain/Home.js";
+import mysql from "mysql2";
 var ConcreteHomeRepository = /** @class */ (function () {
     function ConcreteHomeRepository() {
     }
@@ -123,3 +125,77 @@ var ConcreteHomeRepository = /** @class */ (function () {
     return ConcreteHomeRepository;
 }());
 export { ConcreteHomeRepository };
+var ConcreteMySQLHomeRepository = /** @class */ (function () {
+    function ConcreteMySQLHomeRepository() {
+        this.databasePool = mysql.createPool({
+            host: DBconfig.host,
+            user: DBconfig.user,
+            database: DBconfig.name,
+            password: DBconfig.password,
+            waitForConnections: true,
+            connectionLimit: 10,
+            queueLimit: 0
+        });
+    }
+    ConcreteMySQLHomeRepository.prototype.delete = function (homeIndex) {
+        var _this = this;
+        return new Promise(function (res, rej) {
+            _this.databasePool.query("delete from home where hid = " + homeIndex, function (err, rows, fields) {
+                console.log("delete-home", err);
+                res();
+            });
+        });
+    };
+    ConcreteMySQLHomeRepository.prototype.findByZoneIndex = function (zoneId) {
+        var _this = this;
+        return new Promise(function (res, rej) {
+            _this.databasePool.query("select * from home where zid = " + zoneId, function (err, rows, fields) {
+                console.log("findHomeByZoneIndex-home", err);
+                res(_this.toHomeArray(rows));
+            });
+        });
+    };
+    ConcreteMySQLHomeRepository.prototype.findHomeByIndex = function (homeIndex) {
+        var _this = this;
+        return new Promise(function (res, rej) {
+            _this.databasePool.query("select * from home where hid = " + homeIndex, function (err, rows, fields) {
+                console.log("findHomeByIndex-home", err);
+                res(_this.toHomeArray(rows));
+            });
+        });
+    };
+    ConcreteMySQLHomeRepository.prototype.getAllData = function () {
+        var _this = this;
+        return new Promise(function (res, rej) {
+            _this.databasePool.query("select * from home", function (err, rows, fields) {
+                console.log("getAllData-home", err);
+                res(_this.toHomeArray(rows));
+            });
+        });
+    };
+    ConcreteMySQLHomeRepository.prototype.insert = function (item) {
+        var _this = this;
+        return new Promise(function (res, rej) {
+            _this.databasePool.query("insert into home (hid,zid,title,description) values (" + item.homeIndex + ", " + item.zoneId + ", \"" + item.title + "\", \"" + item.description + "\")", function (err, rows, fields) {
+                console.log("insert-home", err);
+                res();
+            });
+        });
+    };
+    ConcreteMySQLHomeRepository.prototype.toHome = function (row) {
+        return new Home({
+            homeIndex: row.hid,
+            zoneId: row.zid,
+            title: row.title,
+            description: row.description
+        });
+    };
+    ConcreteMySQLHomeRepository.prototype.toHomeArray = function (rows) {
+        var _this = this;
+        return rows.map(function (row) {
+            return _this.toHome(row);
+        });
+    };
+    return ConcreteMySQLHomeRepository;
+}());
+export { ConcreteMySQLHomeRepository };

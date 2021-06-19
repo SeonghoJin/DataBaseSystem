@@ -56,7 +56,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { Router } from "express";
 import { AutoWired } from "jypescript";
-import { ConcreteHomeRepository } from "../repository/HomeRepository.js";
+import { ConcreteMySQLHomeRepository } from "../repository/HomeRepository.js";
 import { ConcreteRoomRepository } from "../repository/RoomRepository.js";
 var room = /** @class */ (function () {
     function room(app) {
@@ -129,7 +129,7 @@ var room = /** @class */ (function () {
     }
     __decorate([
         AutoWired({
-            class: ConcreteHomeRepository
+            class: ConcreteMySQLHomeRepository
         }),
         __metadata("design:type", Object)
     ], room.prototype, "homeRepository", void 0);

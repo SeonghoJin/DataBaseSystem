@@ -6,12 +6,12 @@ import {
     ConcreteMySQLDangerZoneRepository,
     DangerZoneRepository
 } from '../repository/DangerZoneRepository.js';
-import { ConcreteHomeRepository, HomeRepository } from '../repository/HomeRepository.js';
+import {ConcreteHomeRepository, ConcreteMySQLHomeRepository, HomeRepository} from '../repository/HomeRepository.js';
 
 export class HomeService {
 
     @AutoWired({
-        class: ConcreteHomeRepository
+        class: ConcreteMySQLHomeRepository
     })
     homeRepository: HomeRepository;
 

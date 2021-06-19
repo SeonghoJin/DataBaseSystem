@@ -62,7 +62,7 @@ import { Home } from "../domain/Home.js";
 import { Room } from "../domain/Room.js";
 import { ConcreteCommentRepository } from "../repository/CommentRepository.js";
 import { ConcreteMySQLDangerZoneRepository } from "../repository/DangerZoneRepository.js";
-import { ConcreteHomeRepository } from "../repository/HomeRepository.js";
+import { ConcreteMySQLHomeRepository } from "../repository/HomeRepository.js";
 import { ConcreteRoomRepository } from "../repository/RoomRepository.js";
 import { ConcreteMySQLUserRepository } from "../repository/UserRepository.js";
 import { ConcreteMySQLZoneRepository } from "../repository/ZoneRepository.js";
@@ -269,7 +269,7 @@ var admin = /** @class */ (function () {
     ], admin.prototype, "dangerZoneRepository", void 0);
     __decorate([
         AutoWired({
-            class: ConcreteHomeRepository
+            class: ConcreteMySQLHomeRepository
         }),
         __metadata("design:type", Object)
     ], admin.prototype, "homeRepository", void 0);
