@@ -89,7 +89,7 @@ var ConcreteCommentRepository = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.database.remove({
-                            _id: cid
+                            cid: cid
                         })];
                     case 1:
                         _a.sent();

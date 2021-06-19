@@ -6,9 +6,15 @@ export interface DangerZoneRepository extends Repository<DangerZone> {
     findAll(): Promise<DangerZone[]>;
     findById(dangerZoneId: number): Promise<DangerZone[]>;
     insert(dangerZone: DangerZone): Promise<void>;
+    delete(dangerZoneId: number): Promise<void>;
 }
 
 export class ConcreteDangerZoneRepository implements DangerZoneRepository {
+    async delete(dangerZoneId: number): Promise<void> {
+        this.database.remove({
+            dangerZoneId: dangerZoneId
+        });
+    }
 
     async insert(dangerZone: DangerZone): Promise<void> {
         await this.database.insert(dangerZone);

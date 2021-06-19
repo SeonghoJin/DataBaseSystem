@@ -78,7 +78,7 @@ var comment = /** @class */ (function () {
                         return [4 /*yield*/, this.commentRepository.insert(new Comment({
                                 uid: name,
                                 value: comment,
-                                hcid: hcid
+                                hcid: hcid,
                             }))];
                     case 1:
                         _e.sent();

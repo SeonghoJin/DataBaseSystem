@@ -48,6 +48,16 @@ import { DBconfig } from "../config/index.js";
 var ConcreteDangerZoneRepository = /** @class */ (function () {
     function ConcreteDangerZoneRepository() {
     }
+    ConcreteDangerZoneRepository.prototype.delete = function (dangerZoneId) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                this.database.remove({
+                    dangerZoneId: dangerZoneId
+                });
+                return [2 /*return*/];
+            });
+        });
+    };
     ConcreteDangerZoneRepository.prototype.insert = function (dangerZone) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {

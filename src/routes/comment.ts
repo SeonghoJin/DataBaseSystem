@@ -34,7 +34,7 @@ export default class comment {
             await this.commentRepository.insert(new Comment({
                 uid: name,
                 value: comment,
-                hcid: hcid
+                hcid: hcid,
             }));
             res.sendStatus(200);
         })

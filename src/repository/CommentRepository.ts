@@ -5,7 +5,7 @@ import { Comment } from "../domain/Comment";
 export interface CommentRepository extends Repository<Comment> {
     findByhid(hcid: string): Promise<Comment[]>;
     insert(comment: Comment): Promise<void>;
-    delete(cid: string): Promise<void>;
+    delete(cid: string | undefined): Promise<void>;
     findAll(): Promise<Comment[]>;
 }
 
@@ -26,9 +26,9 @@ export class ConcreteCommentRepository implements CommentRepository {
         await this.database.insert(comment);
     }
 
-    async delete(cid: string): Promise<void> {
+    async delete(cid: string | undefined): Promise<void> {
         await this.database.remove({
-            _id: cid
+            cid: cid
         })
     }
 

@@ -48,6 +48,16 @@ import { DBconfig } from "../config/index.js";
 var ConcreteUserRepository = /** @class */ (function () {
     function ConcreteUserRepository() {
     }
+    ConcreteUserRepository.prototype.delete = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                this.database.remove({
+                    id: id
+                });
+                return [2 /*return*/];
+            });
+        });
+    };
     ConcreteUserRepository.prototype.findAll = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {

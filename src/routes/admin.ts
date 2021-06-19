@@ -84,11 +84,22 @@ export class admin {
             });
         });
 
-        this.router.delete("/id", (req, res) => {
+        this.router.delete("/id", async (req, res) => {
             const id = req.fields?.id;
-            this.originDatabase.remove({
-                _id: id
-            });
+            const type = req.fields?.type;
+            if (type === "comment") {
+                await this.commentRepository.delete(id?.toString());
+            } else if (type === "user") {
+                await this.userRepository.delete(id?.toString());
+            } else if (type === "dangerZone") {
+                await this.dangerZoneRepository.delete(Number(id?.toString()));
+            } else if (type === "home") {
+                await this.homeRepository.delete(Number(id));
+            } else if (type === "room") {
+                await this.roomRepository.delete(Number(id));
+            } else {
+                res.sendStatus(400);
+            }
             res.sendStatus(200);
         })
 
@@ -133,14 +144,13 @@ export class admin {
             const description = req.fields?.description;
             const price = req.fields?.price
 
-            const home: Home = (await this.originDatabase.find({
-                _id: hid
-            }))[0];
+            const home: Home = (await this.homeRepository.findHomeByIndex(Number(hid)))[0];
 
             if ((await this.roomRepository.findRoomByIndex(Number(rid))).length !== 0) {
                 res.sendStatus(400);
                 return;
             }
+
             this.roomRepository.insert(new Room({
                 rid: Number(rid),
                 hid: Number(home.homeIndex),

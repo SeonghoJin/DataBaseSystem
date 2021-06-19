@@ -48,6 +48,16 @@ import { DBconfig } from "../config/index.js";
 var ConcreteHomeRepository = /** @class */ (function () {
     function ConcreteHomeRepository() {
     }
+    ConcreteHomeRepository.prototype.delete = function (homeIndex) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                this.database.remove({
+                    homeIndex: homeIndex
+                });
+                return [2 /*return*/];
+            });
+        });
+    };
     ConcreteHomeRepository.prototype.findByZoneIndex = function (zoneId) {
         return __awaiter(this, void 0, void 0, function () {
             var data;

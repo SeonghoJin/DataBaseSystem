@@ -22,7 +22,7 @@
                     <div class="card-body">
                         <p class="card-text"><%=home.comments[i].value%></p>
                         <% if(user.name === home.comments[i].uid) {%>
-                            <button onclick="deleteComment(this)" id=<%=home.comments[i]._id%> class="btn btn-danger">삭제</a>
+                            <button onclick="deleteComment(this)" id=<%=home.comments[i].cid%> class="btn btn-danger">삭제</a>
                         <%} %>
                     </div>
                 </div>

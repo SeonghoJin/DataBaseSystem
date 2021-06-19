@@ -76,9 +76,9 @@
                     class="list-group-item admin-content">
                     <%=users[i].id%>
                     <%if(users[i].id === "admin"){%>
-                        <button id=<%=users[i]._id%> type="button" class="btn btn-danger disabled" onclick="deleteResource(this)">삭제</button>
+                        <button id=<%=users[i].id%> type="button" class="btn btn-danger disabled" onclick="deleteUser(this)">삭제</button>
                     <% } else {%>
-                        <button id=<%=users[i]._id%> type="button" class="btn btn-danger" onclick="deleteResource(this)">삭제</button>
+                        <button id=<%=users[i].id%> type="button" class="btn btn-danger" onclick="deleteUser(this)">삭제</button>
                     <%}%>
                 </li>
                 <%}%>
@@ -93,7 +93,7 @@
                 <li 
                     class="list-group-item admin-content">
                     <%=comments[i].value%>-<%=comments[i].uid%>
-                    <button id=<%=comments[i]._id%> type="button" class="btn btn-danger" onclick="deleteResource(this)">삭제</button>
+                    <button id=<%=comments[i].cid%> type="button" class="btn btn-danger" onclick="deleteComment(this)">삭제</button>
                 </li>
                 <%}%>
             </ul>
@@ -107,7 +107,7 @@
                 <li
                     class="list-group-item admin-content">
                     <%=dangerzones[i].zoneName%>
-                    <button id=<%=dangerzones[i]._id%> type="button" class="btn btn-danger"onclick="deleteResource(this)">삭제</button>
+                    <button id=<%=dangerzones[i].dangerZoneId%> type="button" class="btn btn-danger"onclick="deleteDangerZone(this)">삭제</button>
                 </li>
                 <%}%>
             </ul>
@@ -138,9 +138,9 @@
                     class="list-group-item admin-content">
                     <%=homes[i].title%>
                     <div>
-                        <button id=<%=homes[i]._id%> type="button" data-bs-toggle="modal" data-bs-target="#id<%=homes[i]._id%>-modal" class="btn btn-primary">방추가</button>
-                        <button id=<%=homes[i]._id%> type="button" class="btn btn-danger"onclick="deleteResource(this)">삭제</button>
-                        <div class="modal fade" id="id<%=homes[i]._id%>-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <button id=<%=homes[i].homeIndex%> type="button" data-bs-toggle="modal" data-bs-target="#id<%=homes[i].homeIndex%>-modal" class="btn btn-primary">방추가</button>
+                        <button id=<%=homes[i].homeIndex%> type="button" class="btn btn-danger"onclick="deleteHome(this)">삭제</button>
+                        <div class="modal fade" id="id<%=homes[i].homeIndex%>-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-homeIndexden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                 <div class="modal-header">
@@ -149,19 +149,19 @@
                                 </div>
                                 <div class="modal-body">
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control input-room-index id-<%=homes[i]._id%>" placeholder="homeIndex" aria-label="Username" aria-describedby="basic-addon1">
-                                            <input type="text" class="form-control input-room-price id-<%=homes[i]._id%>" placeholder="price" aria-label="Username" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control input-room-index id-<%=homes[i].homeIndex%>" placeholder="homeIndex" aria-label="Username" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control input-room-price id-<%=homes[i].homeIndex%>" placeholder="price" aria-label="Username" aria-describedby="basic-addon1">
                                         </div>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">description</span> 
-                                            <input type="text" class="form-control input-room-description id-<%=homes[i]._id%>"  
+                                            <input type="text" class="form-control input-room-description id-<%=homes[i].homeIndex%>"  
                                             aria-label="Username" aria-describedby="basic-addon1"
                                             style="height:100px;">
                                         </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                    <button type="button" class="btn btn-primary" onclick="addRoom('<%=homes[i]._id%>')">방추가</button>
+                                    <button type="button" class="btn btn-primary" onclick="addRoom('<%=homes[i].homeIndex%>')">방추가</button>
                                 </div>
                                 </div>
                             </div>
@@ -207,7 +207,7 @@
                     <%if(rooms[i].booker !== undefined){%>
                         -<%=rooms[i].booker%>님이 예약중입니다.
                     <%}%>
-                    <button id=<%=rooms[i]._id%> type="button" class="btn btn-danger"onclick="deleteResource(this)">
+                    <button id=<%=rooms[i].rid%> type="button" class="btn btn-danger"onclick="deleteRoom(this)">
                         삭제
                     </button>
                 </li>
@@ -302,7 +302,86 @@
                 }
             }
         })
+    }
 
+    function deleteRoom(target){
+        $.ajax({
+            url : "/admin/id",
+            type : "DELETE",
+            data : {
+                id : target.id,
+                type : "room"
+            },
+            success : (data) => {
+                if(data === "OK"){
+                    location.reload();
+                }
+            }
+        });
+    }
+
+    function deleteHome(target){
+        $.ajax({
+            url : "/admin/id",
+            type : "DELETE",
+            data : {
+                id : target.id,
+                type : "home"
+            },
+            success : (data) => {
+                if(data === "OK"){
+                    location.reload();
+                }
+            }
+        });
+    }
+
+    function deleteDangerZone(target){
+        $.ajax({
+            url : "/admin/id",
+            type : "DELETE",
+            data : {
+                id : target.id,
+                type : "dangerZone"
+            },
+            success : (data) => {
+                if(data === "OK"){
+                    location.reload();
+                }
+            }
+        });
+    }
+
+    function deleteUser(target){
+        $.ajax({
+            url : "/admin/id",
+            type : "DELETE",
+            data : {
+                id : target.id,
+                type : "user"
+            },
+            success : (data) => {
+                if(data === "OK"){
+                    location.reload();
+                }
+            }
+        });
+    }
+
+    function deleteComment(target){
+        $.ajax({
+            url : "/admin/id",
+            type : "DELETE",
+            data : {
+                id : target.id,
+                type : "comment"
+            },
+            success : (data) => {
+                if(data === "OK"){
+                    location.reload();
+                }
+            }
+        });
     }
 </script>
 </html>

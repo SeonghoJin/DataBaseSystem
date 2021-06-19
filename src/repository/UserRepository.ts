@@ -9,6 +9,7 @@ export interface UserRepository extends Repository<User> {
     exist(id: string, password: string): Promise<boolean>;
     insert(user: User): Promise<void>;
     findAll(): Promise<any>
+    delete(id: string): Promise<void>;
 }
 
 @Bean()
@@ -18,6 +19,11 @@ export class ConcreteUserRepository implements UserRepository {
     database: IDatabase;
 
     constructor() {
+    }
+    async delete(id: string): Promise<void> {
+        this.database.remove({
+            id: id
+        })
     }
     async findAll(): Promise<any> {
         return (await this.database.getAllData()).filter((user) => {

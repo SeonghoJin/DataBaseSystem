@@ -48,6 +48,16 @@ import { DBconfig } from "../config/index.js";
 var ConcreteRoomRepository = /** @class */ (function () {
     function ConcreteRoomRepository() {
     }
+    ConcreteRoomRepository.prototype.delete = function (RoomIndex) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                this.database.remove({
+                    rid: RoomIndex
+                });
+                return [2 /*return*/];
+            });
+        });
+    };
     ConcreteRoomRepository.prototype.update = function (query, updateQuery) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {

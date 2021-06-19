@@ -8,9 +8,15 @@ export interface HomeRepository extends Repository<Home> {
     findByZoneIndex(zoneId: number): Promise<Home[]>
     insert(item: Home): Promise<void>
     getAllData(): Promise<any[]>
+    delete(homeIndex: number): Promise<void>;
 }
 
 export class ConcreteHomeRepository implements HomeRepository {
+    async delete(homeIndex: number): Promise<void> {
+        this.database.remove({
+            homeIndex: homeIndex
+        });
+    }
 
     async findByZoneIndex(zoneId: number): Promise<Home[]> {
         let data: Home[] = await this.database.find({
