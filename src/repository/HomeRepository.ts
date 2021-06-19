@@ -63,7 +63,7 @@ export class ConcreteMySQLHomeRepository implements HomeRepository{
         queueLimit : 0
     });
 
-    delete(homeIndex: number): Promise<void> {
+    async delete(homeIndex: number): Promise<void> {
         return new Promise((res, rej) => {
             this.databasePool.query(`delete from home where hid = ${homeIndex}`,
                 (err, rows, fields) => {
@@ -73,7 +73,7 @@ export class ConcreteMySQLHomeRepository implements HomeRepository{
         })
     }
 
-    findByZoneIndex(zoneId: number): Promise<Home[]> {
+    async findByZoneIndex(zoneId: number): Promise<Home[]> {
         return new Promise((res, rej) => {
             this.databasePool.query(`select * from home where zid = ${zoneId}`,
                 (err, rows, fields) => {
@@ -83,7 +83,7 @@ export class ConcreteMySQLHomeRepository implements HomeRepository{
         })
     }
 
-    findHomeByIndex(homeIndex: number): Promise<Home[]> {
+    async findHomeByIndex(homeIndex: number): Promise<Home[]> {
         return new Promise((res, rej) => {
             this.databasePool.query(`select * from home where hid = ${homeIndex}`,
                 (err, rows, fields) => {
@@ -93,7 +93,7 @@ export class ConcreteMySQLHomeRepository implements HomeRepository{
         })
     }
 
-    getAllData(): Promise<any[]> {
+    async getAllData(): Promise<any[]> {
         return new Promise((res, rej) => {
             this.databasePool.query(`select * from home`,
                 (err, rows, fields) => {
@@ -103,7 +103,7 @@ export class ConcreteMySQLHomeRepository implements HomeRepository{
         })
     }
 
-    insert(item: Home): Promise<void> {
+    async insert(item: Home): Promise<void> {
         return new Promise((res, rej) => {
             this.databasePool.query(`insert into home (hid,zid,title,description) values (${item.homeIndex}, ${item.zoneId}, "${item.title}", "${item.description}")`,
                 (err, rows, fields) => {

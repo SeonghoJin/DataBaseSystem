@@ -45,6 +45,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { Connect } from "jypescript";
 import { DBconfig } from "../config/index.js";
+import { Comment } from "../domain/Comment.js";
+import mysql from "mysql2";
 var ConcreteCommentRepository = /** @class */ (function () {
     function ConcreteCommentRepository() {
     }
@@ -105,3 +107,84 @@ var ConcreteCommentRepository = /** @class */ (function () {
     return ConcreteCommentRepository;
 }());
 export { ConcreteCommentRepository };
+var ConcreteMySQLCommentRepository = /** @class */ (function () {
+    function ConcreteMySQLCommentRepository() {
+        this.databasePool = mysql.createPool({
+            host: DBconfig.host,
+            user: DBconfig.user,
+            database: DBconfig.name,
+            password: DBconfig.password,
+            waitForConnections: true,
+            connectionLimit: 10,
+            queueLimit: 0
+        });
+    }
+    ConcreteMySQLCommentRepository.prototype.delete = function (cid) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("delete from comment where cid = " + cid, function (err, rows, field) {
+                            console.log("delete-comment", err);
+                            res();
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLCommentRepository.prototype.findAll = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from comment", function (err, rows, field) {
+                            console.log("findAll-comment", err);
+                            res(_this.toCommentArray(rows));
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLCommentRepository.prototype.findByhid = function (hcid) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from comment where hid = " + Number(hcid), function (err, rows, field) {
+                            console.log("findByhid-commnet", err);
+                            res(_this.toCommentArray(rows));
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLCommentRepository.prototype.insert = function (comment) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("insert into comment\n                    (uid,hid,value) values(\"" + comment.uid + "\", " + comment.hcid + ", \"" + comment.value + "\")", function (err, rows, field) {
+                            console.log("insert-comment", err);
+                            res();
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLCommentRepository.prototype.toComment = function (row) {
+        return new Comment({
+            cid: row.cid,
+            hcid: row.hid,
+            value: row.value,
+            uid: row.uid
+        });
+    };
+    ConcreteMySQLCommentRepository.prototype.toCommentArray = function (rows) {
+        var _this = this;
+        return rows.map(function (row) {
+            return _this.toComment(row);
+        });
+    };
+    return ConcreteMySQLCommentRepository;
+}());
+export { ConcreteMySQLCommentRepository };

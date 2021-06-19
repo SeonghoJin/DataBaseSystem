@@ -1,7 +1,11 @@
 import { AutoWired } from 'jypescript';
 import { DangerZone } from '../domain/DangerZone.js';
 import { Home } from '../domain/Home.js';
-import { CommentRepository, ConcreteCommentRepository } from '../repository/CommentRepository.js';
+import {
+    CommentRepository,
+    ConcreteCommentRepository,
+    ConcreteMySQLCommentRepository
+} from '../repository/CommentRepository.js';
 import {
     ConcreteMySQLDangerZoneRepository,
     DangerZoneRepository
@@ -21,7 +25,7 @@ export class HomeService {
     dangerZoneRepository: DangerZoneRepository;
 
     @AutoWired({
-        class: ConcreteCommentRepository
+        class: ConcreteMySQLCommentRepository
     })
     commentRepository: CommentRepository
 

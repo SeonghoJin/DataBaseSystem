@@ -138,47 +138,67 @@ var ConcreteMySQLHomeRepository = /** @class */ (function () {
         });
     }
     ConcreteMySQLHomeRepository.prototype.delete = function (homeIndex) {
-        var _this = this;
-        return new Promise(function (res, rej) {
-            _this.databasePool.query("delete from home where hid = " + homeIndex, function (err, rows, fields) {
-                console.log("delete-home", err);
-                res();
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("delete from home where hid = " + homeIndex, function (err, rows, fields) {
+                            console.log("delete-home", err);
+                            res();
+                        });
+                    })];
             });
         });
     };
     ConcreteMySQLHomeRepository.prototype.findByZoneIndex = function (zoneId) {
-        var _this = this;
-        return new Promise(function (res, rej) {
-            _this.databasePool.query("select * from home where zid = " + zoneId, function (err, rows, fields) {
-                console.log("findHomeByZoneIndex-home", err);
-                res(_this.toHomeArray(rows));
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from home where zid = " + zoneId, function (err, rows, fields) {
+                            console.log("findHomeByZoneIndex-home", err);
+                            res(_this.toHomeArray(rows));
+                        });
+                    })];
             });
         });
     };
     ConcreteMySQLHomeRepository.prototype.findHomeByIndex = function (homeIndex) {
-        var _this = this;
-        return new Promise(function (res, rej) {
-            _this.databasePool.query("select * from home where hid = " + homeIndex, function (err, rows, fields) {
-                console.log("findHomeByIndex-home", err);
-                res(_this.toHomeArray(rows));
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from home where hid = " + homeIndex, function (err, rows, fields) {
+                            console.log("findHomeByIndex-home", err);
+                            res(_this.toHomeArray(rows));
+                        });
+                    })];
             });
         });
     };
     ConcreteMySQLHomeRepository.prototype.getAllData = function () {
-        var _this = this;
-        return new Promise(function (res, rej) {
-            _this.databasePool.query("select * from home", function (err, rows, fields) {
-                console.log("getAllData-home", err);
-                res(_this.toHomeArray(rows));
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from home", function (err, rows, fields) {
+                            console.log("getAllData-home", err);
+                            res(_this.toHomeArray(rows));
+                        });
+                    })];
             });
         });
     };
     ConcreteMySQLHomeRepository.prototype.insert = function (item) {
-        var _this = this;
-        return new Promise(function (res, rej) {
-            _this.databasePool.query("insert into home (hid,zid,title,description) values (" + item.homeIndex + ", " + item.zoneId + ", \"" + item.title + "\", \"" + item.description + "\")", function (err, rows, fields) {
-                console.log("insert-home", err);
-                res();
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("insert into home (hid,zid,title,description) values (" + item.homeIndex + ", " + item.zoneId + ", \"" + item.title + "\", \"" + item.description + "\")", function (err, rows, fields) {
+                            console.log("insert-home", err);
+                            res();
+                        });
+                    })];
             });
         });
     };

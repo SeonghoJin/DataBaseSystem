@@ -46,7 +46,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import { Router } from "express";
 import { AutoWired } from "jypescript";
 import { Comment } from "../domain/Comment.js";
-import { ConcreteCommentRepository } from "../repository/CommentRepository.js";
+import { ConcreteMySQLCommentRepository } from "../repository/CommentRepository.js";
 var comment = /** @class */ (function () {
     function comment(app) {
         var _this = this;
@@ -112,7 +112,7 @@ var comment = /** @class */ (function () {
     }
     __decorate([
         AutoWired({
-            class: ConcreteCommentRepository
+            class: ConcreteMySQLCommentRepository
         }),
         __metadata("design:type", Object)
     ], comment.prototype, "commentRepository", void 0);

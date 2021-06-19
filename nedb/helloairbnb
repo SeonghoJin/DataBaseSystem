@@ -1,3 +1,4 @@
+{"uid":"admin","hcid":"1","value":"123","_id":"2NSFsyyGgPldFRgC"}
 {"dangerZoneId":3,"_id":"4Utl6YgWCGeihWmq"}
 {"uid":"진성호","_id":"4XeBrOdtNdg7kOBR"}
 {"hid":1123123,"rid":3123,"description":"2312312","price":1231231,"booker":"admin","_id":"GvCWUCGbXLfqmdpb"}
@@ -10,8 +11,10 @@
 {"uid":"진성호","_id":"XStXecYR4dKEHpBl"}
 {"zid":6,"name":"대전광역시","_id":"XZfyJXqU4IIk1mNE"}
 {"zid":8,"name":"세종특별자치시","_id":"c9P5p4ujMbeHOqwz"}
+{"uid":"admin","hcid":"1","value":"123","_id":"gsiLJtdNb9QIpXNJ"}
 {"zid":7,"name":"울산광역시","_id":"m4N2Hy3AMjtTK41U"}
 {"uid":"진성호","_id":"nMfOU2O1Ukc0WsJ2"}
 {"uid":"진성호","_id":"ozBYQ2u4uGuYZvAL"}
 {"zid":4,"name":"인천광역시","_id":"vR79ko0lDF9KoTUH"}
 {"id":"admin","password":"admin","_id":"xVBpdH7bgsUK75AW"}
+{"hid":1123123,"rid":3123,"description":"2312312","price":1231231,"_id":"GvCWUCGbXLfqmdpb"}

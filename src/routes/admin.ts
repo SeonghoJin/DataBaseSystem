@@ -4,7 +4,11 @@ import { DBconfig } from "../config/index.js";
 import { DangerZone } from "../domain/DangerZone.js";
 import { Home } from "../domain/Home.js";
 import { Room } from "../domain/Room.js";
-import { CommentRepository, ConcreteCommentRepository } from "../repository/CommentRepository.js";
+import {
+    CommentRepository,
+    ConcreteCommentRepository,
+    ConcreteMySQLCommentRepository
+} from "../repository/CommentRepository.js";
 import {
     ConcreteMySQLDangerZoneRepository,
     DangerZoneRepository
@@ -19,7 +23,7 @@ export class admin {
     router: Router = Router();
 
     @AutoWired({
-        class: ConcreteCommentRepository
+        class: ConcreteMySQLCommentRepository
     })
     commentRepository: CommentRepository
 

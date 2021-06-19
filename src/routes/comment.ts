@@ -1,13 +1,17 @@
 import { Router } from "express";
 import { AutoWired } from "jypescript";
 import { Comment } from "../domain/Comment.js";
-import { CommentRepository, ConcreteCommentRepository } from "../repository/CommentRepository.js";
+import {
+    CommentRepository,
+    ConcreteCommentRepository,
+    ConcreteMySQLCommentRepository
+} from "../repository/CommentRepository.js";
 
 export default class comment {
     router: Router = Router();
 
     @AutoWired({
-        class: ConcreteCommentRepository
+        class: ConcreteMySQLCommentRepository
     })
     commentRepository: CommentRepository;
 
