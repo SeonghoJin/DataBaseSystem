@@ -3,7 +3,7 @@ import { AutoWired } from "jypescript";
 import { Home } from "../domain/Home";
 import { Room } from "../domain/Room";
 import {ConcreteHomeRepository, ConcreteMySQLHomeRepository, HomeRepository} from "../repository/HomeRepository.js";
-import { ConcreteRoomRepository, RoomRepository } from "../repository/RoomRepository.js";
+import {ConcreteMySQLRoomRepository, ConcreteRoomRepository, RoomRepository} from "../repository/RoomRepository.js";
 import { HomeService } from "../service/HomeService.js";
 
 export default class hotel {
@@ -15,7 +15,7 @@ export default class hotel {
     homeRepository: HomeRepository;
 
     @AutoWired({
-        class: ConcreteRoomRepository
+        class: ConcreteMySQLRoomRepository
     })
     roomRepository: RoomRepository
 

@@ -45,6 +45,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { Connect } from "jypescript";
 import { DBconfig } from "../config/index.js";
+import { Room } from "../domain/Room.js";
+import mysql from "mysql2";
 var ConcreteRoomRepository = /** @class */ (function () {
     function ConcreteRoomRepository() {
     }
@@ -122,3 +124,92 @@ var ConcreteRoomRepository = /** @class */ (function () {
     return ConcreteRoomRepository;
 }());
 export { ConcreteRoomRepository };
+var ConcreteMySQLRoomRepository = /** @class */ (function () {
+    function ConcreteMySQLRoomRepository() {
+        this.databasePool = mysql.createPool({
+            host: DBconfig.host,
+            user: DBconfig.user,
+            database: DBconfig.name,
+            password: DBconfig.password,
+            waitForConnections: true,
+            connectionLimit: 10,
+            queueLimit: 0
+        });
+    }
+    ConcreteMySQLRoomRepository.prototype.delete = function (RoomIndex) {
+        var _this = this;
+        return new Promise(function (res, rej) {
+            _this.databasePool.query("delete from room where rid = " + RoomIndex, function (err, rows, field) {
+                console.log("delete-room", err);
+                res();
+            });
+        });
+        return Promise.resolve(undefined);
+    };
+    ConcreteMySQLRoomRepository.prototype.findRoomByHomeIndex = function (HomeIndex) {
+        var _this = this;
+        return new Promise(function (res, rej) {
+            _this.databasePool.query("select * from room where hid = " + HomeIndex, function (err, rows, field) {
+                console.log("findRoomByHomeIndex-room", err);
+                res(_this.toRoomArray(rows));
+            });
+        });
+    };
+    ConcreteMySQLRoomRepository.prototype.findRoomByIndex = function (RoomIndex) {
+        var _this = this;
+        return new Promise(function (res, rej) {
+            _this.databasePool.query("select * from room where rid = " + RoomIndex, function (err, rows, field) {
+                console.log("findRoomByIndex-room", err);
+                res(_this.toRoomArray(rows));
+            });
+        });
+    };
+    ConcreteMySQLRoomRepository.prototype.getAllData = function () {
+        var _this = this;
+        return new Promise(function (res, rej) {
+            _this.databasePool.query("select * from room", function (err, rows, field) {
+                console.log("getAllData-room", err);
+                res(_this.toRoomArray(rows));
+            });
+        });
+    };
+    ConcreteMySQLRoomRepository.prototype.insert = function (item) {
+        var _this = this;
+        return new Promise(function (res, rej) {
+            _this.databasePool.query("insert into room (rid, hid, description, price, booker) \n                    values(" + item.rid + ", " + item.hid + ", \"" + item.description + "\", " + item.price + ", NULL)", function (err, rows, field) {
+                console.log("insert-room", err);
+                res();
+            });
+        });
+    };
+    ConcreteMySQLRoomRepository.prototype.update = function (query, updateQuery) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("update room set booker = \"" + updateQuery.booker + "\"", function (err, rows, field) {
+                            console.log("update-room", err);
+                            res();
+                        });
+                    })];
+            });
+        });
+    };
+    ConcreteMySQLRoomRepository.prototype.toRoom = function (row) {
+        return new Room({
+            hid: row.hid,
+            rid: row.rid,
+            description: row.description,
+            price: row.price,
+            booker: row.booker === null ? undefined : row.booker
+        });
+    };
+    ConcreteMySQLRoomRepository.prototype.toRoomArray = function (rows) {
+        var _this = this;
+        return rows.map(function (row) {
+            return _this.toRoom(row);
+        });
+    };
+    return ConcreteMySQLRoomRepository;
+}());
+export { ConcreteMySQLRoomRepository };

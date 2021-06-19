@@ -14,7 +14,7 @@ import {
     DangerZoneRepository
 } from "../repository/DangerZoneRepository.js";
 import {ConcreteHomeRepository, ConcreteMySQLHomeRepository, HomeRepository} from "../repository/HomeRepository.js";
-import { ConcreteRoomRepository, RoomRepository } from "../repository/RoomRepository.js";
+import {ConcreteMySQLRoomRepository, ConcreteRoomRepository, RoomRepository} from "../repository/RoomRepository.js";
 import {ConcreteMySQLUserRepository, ConcreteUserRepository, UserRepository} from "../repository/UserRepository.js";
 import {ConcreteMySQLZoneRepository, ConcreteZoneRepository, ZoneRepository} from "../repository/ZoneRepository.js";
 
@@ -43,7 +43,7 @@ export class admin {
     homeRepository: HomeRepository
 
     @AutoWired({
-        class: ConcreteRoomRepository
+        class: ConcreteMySQLRoomRepository
     })
     roomRepository: RoomRepository
 
