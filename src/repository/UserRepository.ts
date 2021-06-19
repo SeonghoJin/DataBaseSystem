@@ -12,7 +12,6 @@ export interface UserRepository extends Repository<User> {
     delete(id: string | undefined): Promise<void>;
 }
 
-@Bean()
 export class ConcreteUserRepository implements UserRepository {
 
     @Connect(DBconfig)
