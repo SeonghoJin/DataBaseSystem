@@ -40,12 +40,7 @@ export default class room {
                 booker: req.session.user?.name
             });
 
-            res.render('index', {
-                user: req.session.user,
-                hotels: (await this.homeRepository.getAllData()),
-                successReservation: true
-            });
-            res.status(200).send();
+            res.redirect("/");
         });
 
         this.router.delete("/:id", async (req, res) => {

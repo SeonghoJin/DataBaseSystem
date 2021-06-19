@@ -66,7 +66,7 @@ export class ConcreteMySQLRoomRepository implements RoomRepository{
         queueLimit : 0
     });
 
-    delete(RoomIndex: number): Promise<void> {
+    async delete(RoomIndex: number): Promise<void> {
             return new Promise((res, rej) => {
                 this.databasePool.query(`delete from room where rid = ${RoomIndex}`, (
                     err, rows, field
@@ -75,10 +75,9 @@ export class ConcreteMySQLRoomRepository implements RoomRepository{
                     res();
                 })
             })
-        return Promise.resolve(undefined);
     }
 
-    findRoomByHomeIndex(HomeIndex: number): Promise<Room[]> {
+    async findRoomByHomeIndex(HomeIndex: number): Promise<Room[]> {
         return new Promise((res, rej) => {
             this.databasePool.query(`select * from room where hid = ${HomeIndex}`, (
                 err, rows, field
@@ -89,7 +88,7 @@ export class ConcreteMySQLRoomRepository implements RoomRepository{
         })
     }
 
-    findRoomByIndex(RoomIndex: number): Promise<Room[]> {
+    async findRoomByIndex(RoomIndex: number): Promise<Room[]> {
         return new Promise((res, rej) => {
             this.databasePool.query(`select * from room where rid = ${RoomIndex}`, (
                 err, rows, field
@@ -100,7 +99,7 @@ export class ConcreteMySQLRoomRepository implements RoomRepository{
         })
     }
 
-    getAllData(): Promise<any[]> {
+    async getAllData(): Promise<any[]> {
             return new Promise((res, rej) => {
                 this.databasePool.query(`select * from room`, (
                     err, rows, field
@@ -111,7 +110,7 @@ export class ConcreteMySQLRoomRepository implements RoomRepository{
             })
     }
 
-    insert(item: Room): Promise<void> {
+    async insert(item: Room): Promise<void> {
             return new Promise((res, rej) => {
                 this.databasePool.query(`insert into room (rid, hid, description, price, booker) 
                     values(${item.rid}, ${item.hid}, "${item.description}", ${item.price}, NULL)`, (
@@ -125,7 +124,8 @@ export class ConcreteMySQLRoomRepository implements RoomRepository{
 
     async update(query: any, updateQuery: Room): Promise<void> {
             return new Promise((res, rej) => {
-                this.databasePool.query(`update room set booker = "${updateQuery.booker}"`, (
+                const booker = updateQuery.booker === undefined ? null : `"${updateQuery.booker}"` ;
+                this.databasePool.query(`update room set booker = ${booker} where rid = ${query.rid}`, (
                     err, rows, field
                 ) => {
                     console.log("update-room", err);

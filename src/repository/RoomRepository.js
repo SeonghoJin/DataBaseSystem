@@ -137,48 +137,67 @@ var ConcreteMySQLRoomRepository = /** @class */ (function () {
         });
     }
     ConcreteMySQLRoomRepository.prototype.delete = function (RoomIndex) {
-        var _this = this;
-        return new Promise(function (res, rej) {
-            _this.databasePool.query("delete from room where rid = " + RoomIndex, function (err, rows, field) {
-                console.log("delete-room", err);
-                res();
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("delete from room where rid = " + RoomIndex, function (err, rows, field) {
+                            console.log("delete-room", err);
+                            res();
+                        });
+                    })];
             });
         });
-        return Promise.resolve(undefined);
     };
     ConcreteMySQLRoomRepository.prototype.findRoomByHomeIndex = function (HomeIndex) {
-        var _this = this;
-        return new Promise(function (res, rej) {
-            _this.databasePool.query("select * from room where hid = " + HomeIndex, function (err, rows, field) {
-                console.log("findRoomByHomeIndex-room", err);
-                res(_this.toRoomArray(rows));
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from room where hid = " + HomeIndex, function (err, rows, field) {
+                            console.log("findRoomByHomeIndex-room", err);
+                            res(_this.toRoomArray(rows));
+                        });
+                    })];
             });
         });
     };
     ConcreteMySQLRoomRepository.prototype.findRoomByIndex = function (RoomIndex) {
-        var _this = this;
-        return new Promise(function (res, rej) {
-            _this.databasePool.query("select * from room where rid = " + RoomIndex, function (err, rows, field) {
-                console.log("findRoomByIndex-room", err);
-                res(_this.toRoomArray(rows));
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from room where rid = " + RoomIndex, function (err, rows, field) {
+                            console.log("findRoomByIndex-room", err);
+                            res(_this.toRoomArray(rows));
+                        });
+                    })];
             });
         });
     };
     ConcreteMySQLRoomRepository.prototype.getAllData = function () {
-        var _this = this;
-        return new Promise(function (res, rej) {
-            _this.databasePool.query("select * from room", function (err, rows, field) {
-                console.log("getAllData-room", err);
-                res(_this.toRoomArray(rows));
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("select * from room", function (err, rows, field) {
+                            console.log("getAllData-room", err);
+                            res(_this.toRoomArray(rows));
+                        });
+                    })];
             });
         });
     };
     ConcreteMySQLRoomRepository.prototype.insert = function (item) {
-        var _this = this;
-        return new Promise(function (res, rej) {
-            _this.databasePool.query("insert into room (rid, hid, description, price, booker) \n                    values(" + item.rid + ", " + item.hid + ", \"" + item.description + "\", " + item.price + ", NULL)", function (err, rows, field) {
-                console.log("insert-room", err);
-                res();
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (res, rej) {
+                        _this.databasePool.query("insert into room (rid, hid, description, price, booker) \n                    values(" + item.rid + ", " + item.hid + ", \"" + item.description + "\", " + item.price + ", NULL)", function (err, rows, field) {
+                            console.log("insert-room", err);
+                            res();
+                        });
+                    })];
             });
         });
     };
@@ -187,7 +206,8 @@ var ConcreteMySQLRoomRepository = /** @class */ (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2 /*return*/, new Promise(function (res, rej) {
-                        _this.databasePool.query("update room set booker = \"" + updateQuery.booker + "\"", function (err, rows, field) {
+                        var booker = updateQuery.booker === undefined ? null : "\"" + updateQuery.booker + "\"";
+                        _this.databasePool.query("update room set booker = " + booker + " where rid = " + query.rid, function (err, rows, field) {
                             console.log("update-room", err);
                             res();
                         });

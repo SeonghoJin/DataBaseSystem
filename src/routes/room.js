@@ -64,19 +64,18 @@ var room = /** @class */ (function () {
         this.router = Router();
         app.use('/room', this.router);
         this.router.get('/:id', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-            var room, _a, _b, _c;
-            var _d;
-            var _e, _f;
-            return __generator(this, function (_g) {
-                switch (_g.label) {
+            var room;
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        if (req.session.user === undefined || ((_e = req.session.user) === null || _e === void 0 ? void 0 : _e.isAuthenticated) === false) {
+                        if (req.session.user === undefined || ((_a = req.session.user) === null || _a === void 0 ? void 0 : _a.isAuthenticated) === false) {
                             res.redirect('/');
                             return [2 /*return*/];
                         }
                         return [4 /*yield*/, this.roomRepository.findRoomByIndex(Number(req.params.id))];
                     case 1:
-                        room = (_g.sent());
+                        room = (_c.sent());
                         if (room.length === 0) {
                             res.redirect('/');
                             return [2 /*return*/];
@@ -84,20 +83,10 @@ var room = /** @class */ (function () {
                         room = room[0];
                         return [4 /*yield*/, this.roomRepository.update({
                                 rid: room.rid
-                            }, __assign(__assign({}, room), { booker: (_f = req.session.user) === null || _f === void 0 ? void 0 : _f.name }))];
+                            }, __assign(__assign({}, room), { booker: (_b = req.session.user) === null || _b === void 0 ? void 0 : _b.name }))];
                     case 2:
-                        _g.sent();
-                        _b = (_a = res).render;
-                        _c = ['index'];
-                        _d = {
-                            user: req.session.user
-                        };
-                        return [4 /*yield*/, this.homeRepository.getAllData()];
-                    case 3:
-                        _b.apply(_a, _c.concat([(_d.hotels = (_g.sent()),
-                                _d.successReservation = true,
-                                _d)]));
-                        res.status(200).send();
+                        _c.sent();
+                        res.redirect("/");
                         return [2 /*return*/];
                 }
             });
